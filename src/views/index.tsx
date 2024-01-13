@@ -1,10 +1,15 @@
 import React from 'react';
 import Styles from './styles';
-import PropTypes from 'prop-types'
 import Button from '@mui/material/Button';
 
+interface CounterProps {
+    currentCounter: number;
+    onIncrement: () => void;
+    onDecrement: () => void;
+    onReset: () => void;
+  }
 
-const Counter = (props)=>{
+  const Counter: React.FC<CounterProps> = (props) => {
     return (
     <div>
         <div style={{ marginBottom: '10px' }}>Current count: {props.currentCounter}</div>
@@ -22,7 +27,3 @@ const Counter = (props)=>{
 };
 
 export default Counter;
-
-Counter.propTypes = {
-    props: PropTypes.object
-}
