@@ -1,15 +1,14 @@
 
 import React from 'react';
-import Counter from '../views/index';
+import Counter from '../views/Counter/index';
 
 interface ICounterComponent{
-    state:object;
-    onIncrementClick: ()=> void;
-    onDecrementClick: ()=> void;
-    onResetClick: ()=> void;
+    key: number;
+
 }
 
 class CounterContainer extends React.Component<ICounterComponent>{
+
     state = {
         currentCounter: 0
     }
@@ -24,12 +23,14 @@ class CounterContainer extends React.Component<ICounterComponent>{
         this.setState({
             currentCounter: this.state.currentCounter-1
         });
+  
     }
 
     onResetClick = ()=>{
         this.setState({
             currentCounter: 0
         });
+  
     }
 
     render(){
