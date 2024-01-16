@@ -1,6 +1,6 @@
 import React from 'react';
-import Styles from './styles';
 import Button from '@mui/material/Button';
+import '../Counter/styles.css'
 
 interface CounterProps {
     index:number;
@@ -12,19 +12,21 @@ interface CounterProps {
 
   const Counter: React.FC<CounterProps> = (props) => {
     return (
-    <div>
-        <div style={{ marginBottom: '10px' }}>Current count: {props.currentCounter}</div>
-        <Button style={Styles.buttonStyle} onClick={()=>props.onIncrement(props.index, props.currentCounter)} variant="contained" color="primary">
-            Increment
-        </Button>
-        <Button style={Styles.buttonStyle} onClick={()=>props.onDecrement(props.index, props.currentCounter)} variant="contained" color="primary">
-            Decrement
-        </Button>
-        <Button style={Styles.buttonStyle} onClick={()=>props.onReset(props.index, props.currentCounter)} variant="contained" color="primary">
-            Reset
-        </Button>
-    </div>
-    )
+      <div className='counter-container'>
+          <div className="counter-block">
+            <div style={{ marginBottom: '10px' }}>Сount: {props.currentCounter}</div>
+            <Button  className="button-style" onClick={() => props.onIncrement(props.index, props.currentCounter)} variant="contained" color="primary">
+              Increment
+            </Button>
+            <Button  className="button-style" onClick={() => props.onDecrement(props.index, props.currentCounter)} variant="contained" color="primary">
+              Decrement
+            </Button>
+            <Button  className="button-style" onClick={() => props.onReset(props.index, props.currentCounter)} variant="contained" color="primary">
+              Reset
+            </Button>
+          </div>
+          </div>
+      );
 };
 
 export default Counter;

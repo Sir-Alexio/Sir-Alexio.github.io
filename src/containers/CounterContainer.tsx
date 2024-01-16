@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import ParentCounter from '../views/ParentCounter/index';
-import { count } from 'console';
-
 
 interface ICounterComponent {
   key: number;
@@ -15,7 +13,7 @@ const CounterContainer: React.FC<ICounterComponent> = () => {
   const addNewCounter = () => {
     setCounters((prevCounters)=>{
       const updatedCounters = prevCounters.map((item) => {
-        return item % 2 === 0 ? item + 1 : item;
+        return item % 2 === 0 && item !== 0 ? item + 1 : item;
       });
   
       return [...updatedCounters, 0];
@@ -30,9 +28,9 @@ const CounterContainer: React.FC<ICounterComponent> = () => {
         updatedCounters.shift();
 
         updatedCounters = updatedCounters.map((item)=>{
-          return item % 2 !== 0 ? item - 1 : item;
+          return item % 2 !== 0 && item !== 0 ? item - 1 : item;
         });
-        
+
         return updatedCounters;
       });
     }
@@ -53,7 +51,7 @@ const CounterContainer: React.FC<ICounterComponent> = () => {
   const onDecrementClick = (index:number, value:number) => {
     setCounters((prevCounters)=>{
 
-      if(counters.length>1){
+      if(counters.length>=1){
 
         prevCounters = [...counters];
         prevCounters[index] = value - 1;

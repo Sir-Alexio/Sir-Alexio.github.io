@@ -1,8 +1,8 @@
+// import '../Counter/styles.css';
 import React from 'react';
-import Styles from '../Counter/styles';
 import Button from '@mui/material/Button';
 import Counter from '../Counter/index';
-
+import Styles from './style';
 
 interface CounterProps {
   myCounters: number[];
@@ -19,15 +19,18 @@ interface CounterProps {
 const ParentCounter: React.FC<CounterProps> = (props) => { 
   return (
     <div>
+      <div className='counter-block'>
       <Button style={Styles.buttonStyle} onClick={props.addNewCounter} variant="contained" color="primary">
         New
       </Button>
       <Button style={Styles.buttonStyle} onClick={props.removeFirstCounter} variant="contained" color="primary">
-        Delete
+      Delete
       </Button>
       <Button style={Styles.buttonStyle} onClick={props.resetCounters} variant="contained" color="primary">
         Reset
       </Button>
+      </div>
+
       <div>{props.myCounters.map((counter,index)=>(
         <Counter
             key={index}
