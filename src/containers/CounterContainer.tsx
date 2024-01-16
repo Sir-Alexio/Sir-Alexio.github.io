@@ -1,44 +1,35 @@
-
-import React from 'react';
+import React, { useState } from 'react';
 import Counter from '../views/Counter/index';
 
-interface ICounterComponent{
-    key: number;
-
+interface ICounterComponent {
+  key: number;
+  changedValue: number;
 }
 
-class CounterContainer extends React.Component<ICounterComponent>{
+const CounterContainer: React.FC<ICounterComponent> = (props) => {
 
-    state = {
-        currentCounter: 0
-    }
+  const [currentCounter, setCurrentCounter] = useState(props.changedValue);
 
-    onIncrementClick = ()=>{
-        this.setState({
-            currentCounter: this.state.currentCounter+1
-        });
-    }
+  const onIncrementClick = () => {
+    setCurrentCounter((prevCounter) => prevCounter + 1);
+  };
 
-    onDecrementClick = ()=>{
-        this.setState({
-            currentCounter: this.state.currentCounter-1
-        });
-  
-    }
+  const onDecrementClick = () => {
+    setCurrentCounter((prevCounter) => prevCounter - 1);
+  };
 
-    onResetClick = ()=>{
-        this.setState({
-            currentCounter: 0
-        });
-  
-    }
+  const onResetClick = () => {
+    setCurrentCounter(0);
+  };
 
-    render(){
-        return <Counter currentCounter={this.state.currentCounter}
-                        onIncrement={this.onIncrementClick} 
-                        onDecrement={this.onDecrementClick} 
-                        onReset={this.onResetClick} />
-    }
-}
+  return (
+    <Counter
+      currentCounter={currentCounter}
+      onIncrement={onIncrementClick}
+      onDecrement={onDecrementClick}
+      onReset={onResetClick}
+    />
+  );
+};
 
 export default CounterContainer;

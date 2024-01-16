@@ -4,6 +4,7 @@ import Button from '@mui/material/Button';
 
 interface MyCounterProps {
   key: number;
+  changedValue : number;
 }
 
 interface CounterProps {
@@ -13,8 +14,7 @@ interface CounterProps {
   resetCounters :()=> void;
 }
 
-const ParentCounter: React.FC<CounterProps> = (props) => {
- 
+const ParentCounter: React.FC<CounterProps> = (props) => { 
   return (
     <div>
       <Button style={Styles.buttonStyle} onClick={props.addNewCounter} variant="contained" color="primary">

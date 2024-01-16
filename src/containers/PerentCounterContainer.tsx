@@ -5,20 +5,26 @@ import ParentCounter from '../views/ParentCounter/index';
 
 interface MyCounterProps {
     key: number;
+    changedValue : number;
   }
 
 const PerentCounterContainer: React.FC = () =>{
-    const [counters, setCounters] = useState<React.ReactElement<MyCounterProps>[]>([]);
-    const [counterKey, setCounterKey] = useState(0);
   
+    const [counters, setCounters] = useState<React.ReactElement<MyCounterProps>[]>([]);
+
+    const [counterKey, setCounterKey] = useState(0);
+
     const addNewCounter = () => {
-      setCounters(() => [
-        ...counters,
-        <CounterContainer
-          key={counterKey}
-        />
-      ]);
-      setCounterKey((prevKey) => prevKey + 1);
+      setCounters(() => {
+        return [
+            ...counters,
+            <CounterContainer
+              key={counterKey}
+              changedValue={0}
+            />
+          ]
+      });
+      setCounterKey(() => counterKey + 1);
     };
   
     const removeFirstCounter = () => {
@@ -35,15 +41,17 @@ const PerentCounterContainer: React.FC = () =>{
       setCounters([
         <CounterContainer
           key={counterKey}
+          changedValue={0}
         />
       ]);
-      setCounterKey((prevKey) => prevKey + 1);
+      setCounterKey(() => counterKey + 1);
     };
+
   
     if (counters.length === 0) {
       addNewCounter();
     }
-  
+
     return (
         <div>
             <ParentCounter 
