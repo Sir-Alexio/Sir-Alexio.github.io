@@ -1,17 +1,19 @@
 import React from 'react';
 import Styles from '../Counter/styles';
 import Button from '@mui/material/Button';
+import Counter from '../Counter/index';
 
-interface MyCounterProps {
-  key: number;
-  changedValue : number;
-}
 
 interface CounterProps {
-  myCounters:React.ReactElement<MyCounterProps>[];
+  myCounters: number[];
+
   addNewCounter :()=> void;
   removeFirstCounter:()=> void;
   resetCounters :()=> void;
+
+  onIncrementCount :(index:number,value:number)=> void;
+  onDecrementCount :(index:number, value:number)=> void;
+  onResetCount :(index:number, value:number)=> void;
 }
 
 const ParentCounter: React.FC<CounterProps> = (props) => { 
@@ -26,7 +28,17 @@ const ParentCounter: React.FC<CounterProps> = (props) => {
       <Button style={Styles.buttonStyle} onClick={props.resetCounters} variant="contained" color="primary">
         Reset
       </Button>
-      <div>{props.myCounters}</div>
+      <div>{props.myCounters.map((counter,index)=>(
+        <Counter
+            key={index}
+            index={index}
+            currentCounter={counter}
+            onIncrement={props.onIncrementCount}
+            onDecrement={props.onDecrementCount}
+            onReset={props.onResetCount}
+          />
+      ))}
+      </div>
     </div>
   );
 };

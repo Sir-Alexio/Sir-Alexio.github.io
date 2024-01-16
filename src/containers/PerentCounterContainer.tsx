@@ -9,7 +9,7 @@ interface MyCounterProps {
   }
 
 const PerentCounterContainer: React.FC = () =>{
-  
+
     const [counters, setCounters] = useState<React.ReactElement<MyCounterProps>[]>([]);
 
     const [counterKey, setCounterKey] = useState(0);
@@ -54,11 +54,11 @@ const PerentCounterContainer: React.FC = () =>{
 
     return (
         <div>
-            <ParentCounter 
-            myCounters={counters}
+            {/* <ParentCounter 
+            // myCounters={counters}
             addNewCounter = {addNewCounter}
             removeFirstCounter = {removeFirstCounter}
-            resetCounters = {resetCounters}/>
+            resetCounters = {resetCounters}/> */}
         </div>
     )
 }

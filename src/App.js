@@ -7,11 +7,10 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <PerentCounterContainer />
+        <CounterContainer />
       </header>
     </div>
   );
 }
 
-export default App;
+export default App; 
