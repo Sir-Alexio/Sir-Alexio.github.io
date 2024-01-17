@@ -22,8 +22,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "homepage": "https://sir-alexio.github.io/Task2-React-Development",
-    "deploy": "gh-pages -d build -b Task2-React-Development",
+    "homepage": "https://sir-alexio.github.io/Task4-React-Development",
+    "deploy": "gh-pages -d build -b Task4-React-Development",
     "predeploy": "npm run build",
     "start": "react-scripts start",
     "build": "react-scripts build",
