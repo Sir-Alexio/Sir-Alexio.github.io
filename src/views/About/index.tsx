@@ -1,7 +1,7 @@
 const About : React.FC = ()=>{
     return (
         <div>
-            <h1>Some info about company</h1>
+            <h3>Some info about company</h3>
         </div>
     )
 }

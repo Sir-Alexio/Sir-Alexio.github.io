@@ -19,7 +19,7 @@ const ParentCounter: React.FC<CounterProps> = (props) => {
   return (
     <div>
       <div className='counter-container'>
-      <div className='counter-block'>
+      <div className='counter-block-parent'>
       <Button style={Styles.buttonStyle} onClick={props.addNewCounter} variant="contained" color="primary">
         New
       </Button>
