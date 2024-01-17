@@ -6,6 +6,7 @@ import Counters from './containers/CounterContainer';
 import About from './views/About/index';
 import Homepage from './views/Home/index';
 import NotFound from './views/NotFound/index';
+import Login from './views/Login/index';
 
 function App() {
   const location = useLocation();
@@ -32,6 +33,15 @@ function App() {
               backgroundColor: location.pathname === '/counters' ? '#1a1d23' : 'transparent',
             }}
           />
+          <Tab
+            label="Login"
+            component={Link}
+            to="/login"
+            style={{
+              color: 'white',
+              backgroundColor: location.pathname === '/login' ? '#1a1d23' : 'transparent',
+            }}
+          />
         </Tabs>
       </AppBar>
 
@@ -39,6 +49,7 @@ function App() {
         <Route path="/" element={<Homepage />} />
         <Route path="/about" element={<About />} />
         <Route path="/counters" element={<Counters />} />
+        <Route path="/login" element={<Login />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
