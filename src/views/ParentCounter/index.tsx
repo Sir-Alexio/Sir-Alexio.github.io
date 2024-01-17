@@ -18,6 +18,7 @@ interface CounterProps {
 const ParentCounter: React.FC<CounterProps> = (props) => { 
   return (
     <div>
+      <div className='counter-container'>
       <div className='counter-block'>
       <Button style={Styles.buttonStyle} onClick={props.addNewCounter} variant="contained" color="primary">
         New
@@ -29,7 +30,7 @@ const ParentCounter: React.FC<CounterProps> = (props) => {
         Reset
       </Button>
       </div>
-
+      </div>
       <div>{props.myCounters.map((counter,index)=>(
         <Counter
             key={index}
