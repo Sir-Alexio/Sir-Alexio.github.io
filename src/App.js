@@ -1,12 +1,11 @@
 import './styles.css'
 import {Routes, Route, Link, NavLink,useLocation } from 'react-router-dom';
 import { AppBar, Tab, Tabs} from '@mui/material';
-
 import Counters from './containers/CounterContainer';
 import About from './views/About/index';
 import Homepage from './views/Home/index';
 import NotFound from './views/NotFound/index';
-import Login from './views/Login/index';
+import LoginContainer from './containers/LoginContainer'
 
 function App() {
   const location = useLocation();
@@ -49,7 +48,7 @@ function App() {
         <Route path="/" element={<Homepage />} />
         <Route path="/about" element={<About />} />
         <Route path="/counters" element={<Counters />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<LoginContainer />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

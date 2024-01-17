@@ -1,24 +1,20 @@
 body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-      sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    background-color: #0f1116; /* Обновленный цвет страницы */
+    background-color: #0f1116; 
     color: white;
   }
   
   header {
     width: 100%;
-    background-color: #0F1116; /* Обновленный цвет шапки */
+    background-color: #0F1116; 
     padding: 20px;
+    border-bottom: 0.5px solid #9f9b9b;
   }
   
   header a {
     margin-right: 15px;
-    color: white; /* Цвет текста табов */
+    color: white; 
     text-decoration: none;
-    font-size: 18px; /* Обновленный размер текста табов */
-    font-weight: normal; /* Обновленная жирность текста табов */
+    font-size: 18px; 
+    font-weight: normal; 
   }
