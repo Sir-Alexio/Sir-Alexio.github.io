@@ -1,8 +1,15 @@
-import React from "react";
-import { useSelector } from 'react-redux';
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from 'react-redux';
 import TextField from '@mui/material/TextField';
 import Avatar from '@mui/material/Avatar';
-import Image from './2.png';
+import Image from './image.png';
+import Alert from '@mui/material/Alert';
+import CheckIcon from '@mui/icons-material/Check';
+
+import {
+  creteNotification,
+  resetNotification} 
+  from 'D:/work/React/my-react-app/src/redux/Actions/actions';
 
 
 interface IEmailValidationState{
@@ -10,12 +17,38 @@ interface IEmailValidationState{
     passError:string;
     loginField:string;
     passwordField:string;
+    notification:string;
 }
 const ReduxSuccess: React.FC = ()=>{
     const login = useSelector((state:IEmailValidationState) => state.loginField)
     const password = useSelector((state:IEmailValidationState) => state.passwordField)
+    const notification = useSelector((state:IEmailValidationState) => state.notification)
+    const dispatch = useDispatch();
+
+    const successNotification = ()=>{
+      dispatch(creteNotification('Account has been successfuly creted'));
+
+      setTimeout(()=>{
+        dispatch(resetNotification())
+      },3000)
+      
+    }
+
+    useEffect(()=>{
+      if(login && password){
+        successNotification()
+      }
+    },[])
+
     return (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', color: 'white', padding: '28.8px', margin: '144px' }}>
+        {notification && (
+        <div style={{ position: 'fixed', top: 20, right: 20, zIndex: 9999 }}>
+           <Alert variant="filled" severity="success">
+            {notification}
+          </Alert>
+        </div>
+      )}
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <Avatar alt="Remy Sharp" src={Image} sx={{ width: '207.36px', height: '207.36px', marginRight: '51.84px' }} />
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>

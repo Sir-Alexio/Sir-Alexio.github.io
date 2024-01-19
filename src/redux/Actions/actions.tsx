@@ -14,6 +14,13 @@ type PassField = { type: 'PASSWORD', payload: {
   password:string,
 }};
 
+type Notification = { type: 'NOTIFICATION', payload: {
+  text:string,
+}};
+
+type ResetNotification = { type: 'RESET_NOTIFICATION' };
+
+
 export const validateEmail = (): EmailValidationAction => ({
   type: 'EMAIL_ERROR',
 });
@@ -51,4 +58,15 @@ export const passwordField = (inputText:string): PassField =>({
     password:inputText,
   }
 })
+
+export const creteNotification = (inputText:string): Notification => ({
+  type: 'NOTIFICATION',
+  payload: {
+    text:inputText
+  }
+});
+
+export const resetNotification = (): ResetNotification => ({
+  type: 'RESET_NOTIFICATION',
+});
 

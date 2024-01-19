@@ -5,6 +5,7 @@ interface IEmailValidationState{
     passError:string;
     loginField:string;
     passwordField:string;
+    notification:string;
 }
 
 const EmailValidationInitialState:IEmailValidationState = {
@@ -12,6 +13,7 @@ const EmailValidationInitialState:IEmailValidationState = {
     passError:'',
     loginField:'',
     passwordField:'',
+    notification:'',
 }
 
 
@@ -21,10 +23,15 @@ type ErrorAction = { type: 'EMAIL_ERROR'} |
                     { type: 'PASS_SUCCESS'}|
                     { type: 'RESET_ERRORS'} |
                     { type: 'RESET_DATA'} |
+                    { type: 'RESET_NOTIFICATION'} |
                     { type: 'LOGIN',
                         payload: {
                         email:string,
-                      }}|  
+                      }}| 
+                    { type: 'NOTIFICATION',
+                      payload: {
+                      text:string,
+                    }}| 
                     { type: 'PASSWORD',
                         payload: {
                         password:string,
@@ -50,8 +57,14 @@ const ValidationReducer = (state:IEmailValidationState = EmailValidationInitialS
         case 'PASSWORD':
             return state ? { ...state, passwordField: action.payload.password } : state;
 
+        case 'NOTIFICATION':
+            return state ? { ...state, notification: action.payload.text } : state;
+
         case 'RESET_ERRORS':
             return state ? { ...state, emailError:'',passError:''} : state;
+
+        case 'RESET_NOTIFICATION':
+            return state ? { ...state, notification:''} : state;
 
         case 'RESET_DATA':
             return state ? { ...state, loginField:'',passwordField:''} : state;

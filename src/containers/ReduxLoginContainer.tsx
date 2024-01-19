@@ -6,7 +6,7 @@ import {useNavigate} from 'react-router-dom';
 //функциональный компонент для стандартного логина
 const LoginReduxContainer : React.FC = () =>{
 
-    const { emailError, passError, inputLogin, inputPassword, reset } = ValidationContainer();
+    const { emailError, passError, inputLogin, inputPassword } = ValidationContainer();
 
     const navigate = useNavigate();
 
