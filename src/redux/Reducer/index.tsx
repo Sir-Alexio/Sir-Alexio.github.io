@@ -16,9 +16,11 @@ const EmailValidationInitialState:IEmailValidationState = {
 
 
 type ErrorAction = { type: 'EMAIL_ERROR'} | 
-                    { type: 'EMAIL_SUCCESS'} | 
+                    { type: 'EMAIL_SUCCESS'} |  
                     { type: 'PASS_ERROR'} | 
                     { type: 'PASS_SUCCESS'}|
+                    { type: 'RESET_ERRORS'} |
+                    { type: 'RESET_DATA'} |
                     { type: 'LOGIN',
                         payload: {
                         email:string,
@@ -47,6 +49,12 @@ const ValidationReducer = (state:IEmailValidationState = EmailValidationInitialS
 
         case 'PASSWORD':
             return state ? { ...state, passwordField: action.payload.password } : state;
+
+        case 'RESET_ERRORS':
+            return state ? { ...state, emailError:'',passError:''} : state;
+
+        case 'RESET_DATA':
+            return state ? { ...state, loginField:'',passwordField:''} : state;
 
         default:
             return state || EmailValidationInitialState;

@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useEffect } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import {useNavigate,Routes,Route } from 'react-router-dom';
-import ReduxSuccess from '../Redux-Success/index';
-import {validateEmail, successEmail, validatePassword,successPassword, loginField,passwordField} from 'D:/work/React/my-react-app/src/redux/Actions/actions';
+import {validateEmail,
+        successEmail, 
+        validatePassword,
+        successPassword, 
+        loginField,
+        passwordField,
+        resetErrors,
+        resetData} from 'D:/work/React/my-react-app/src/redux/Actions/actions';
 
 interface IEmailValidationState{
     emailError:string;
@@ -56,18 +62,21 @@ const LoginRedux:React.FC =()=>{
 
   const onButtonClick = ()=>{
     if (!emailError && !passError && inputLogin && inputPassword) {
-      console.log("Прошли капчу");
-      
       navigate('/login-redux/success');
     }
   }
+
+  useEffect(() => {
+    dispatch(resetErrors());
+    dispatch(resetData());
+  }, []);
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', color: 'white', padding: '20px', margin: '100px' }}>
         <TextField
         id="standard-basic"
         label="Login"
-        variant="standard"
+        variant="outlined"
         inputProps={{
           style: { color: 'white', border: '1px solid white', borderRadius: '4px' },
         }}
@@ -83,7 +92,7 @@ const LoginRedux:React.FC =()=>{
       <TextField
         id="outlined-basic"
         label="Password"
-        variant="standard"
+        variant="outlined"
         inputProps={{
           style: { color: 'white', border: '1px solid white', borderRadius: '4px' },
         }}
