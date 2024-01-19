@@ -1,79 +1,27 @@
 import React, { useEffect } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { useDispatch, useSelector } from 'react-redux';
-import {useNavigate,Routes,Route } from 'react-router-dom';
-import {validateEmail,
-        successEmail, 
-        validatePassword,
-        successPassword, 
-        loginField,
-        passwordField,
-        resetErrors,
-        resetData} from 'D:/work/React/my-react-app/src/redux/Actions/actions';
+import {ValidationContainer} from '../../Services/ValidationService';
+import Typography from '@mui/material/Typography';
 
-interface IEmailValidationState{
-    emailError:string;
-    passError:string;
-    loginField:string;
-    passwordField:string;
+interface ILoginRedux{
+  onButtonClick:()=>void,
+  onEnterClick:(event: React.KeyboardEvent<HTMLInputElement>)=>void
 }
 
-const LoginRedux:React.FC =()=>{
-
-  const dispatch = useDispatch();
-  
-  const emailError = useSelector((state:IEmailValidationState) => state.emailError);
-  const passError = useSelector((state:IEmailValidationState) => state.passError);
-  const inputLogin = useSelector((state:IEmailValidationState) => state.loginField);
-  const inputPassword = useSelector((state:IEmailValidationState) => state.passwordField);
-  const navigate = useNavigate();
-
-  const  onEmailChange = (event: React.ChangeEvent<HTMLInputElement>)=>{    
-    //Определим регулярное выражение
-    let regex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
-
-    //Получаем почту
-    let email = event.target.value;
-
-    dispatch(loginField(email));
-
-    //Используем хук для проверки почты по регулярному выражению
-    if (!email.match(regex)) {
-      dispatch(validateEmail());
-    }
-    else{
-      dispatch(successEmail());
-    }
-  } 
-
-  const onPasswordChange = (event: React.ChangeEvent<HTMLInputElement>)=>{
-    let password = event.target.value;
-    
-    dispatch(passwordField(password));
-
-    if (password.length <= 6) {
-      dispatch(validatePassword());
-    }
-    else{
-      dispatch(successPassword());
-    }
-  }
-
-  const onButtonClick = ()=>{
-    if (!emailError && !passError && inputLogin && inputPassword) {
-      navigate('/login-redux/success');
-    }
-  }
+const LoginRedux:React.FC<ILoginRedux> =(props)=>{
+  const { emailError, passError, onEmailChange, onPasswordChange, inputLogin,inputPassword, reset } = ValidationContainer();  
 
   useEffect(() => {
-    dispatch(resetErrors());
-    dispatch(resetData());
+    reset();
   }, []);
 
-    return (
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', color: 'white', padding: '20px', margin: '100px' }}>
-        <TextField
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', color: 'white', padding: '20px', margin: '58px' }}>
+      <Typography variant="h5" style={{ color: 'white', marginBottom: '10px', textShadow: '0px 0px 1px white' }}>
+        REDUX
+      </Typography>
+      <TextField
         id="standard-basic"
         label="Login"
         variant="outlined"
@@ -88,6 +36,7 @@ const LoginRedux:React.FC =()=>{
         onChange={onEmailChange}
         error={Boolean(emailError)}
         helperText={emailError}
+        onKeyDown={props.onEnterClick}
       />
       <TextField
         id="outlined-basic"
@@ -105,12 +54,14 @@ const LoginRedux:React.FC =()=>{
         onChange={onPasswordChange}
         error={Boolean(passError)}
         helperText={passError}
+        onKeyDown={props.onEnterClick}
       />
       <Button
         variant="contained"
         sx={{ fontSize: '1.15rem' }}
         style={{ margin: '10px' }}
-        onClick={onButtonClick}>
+        onClick={props.onButtonClick}
+      >
         Enter
       </Button>
       <div className="counter-block" style={{ marginTop: '20px', fontSize: '18px', color: 'white', margin: '70px' }}>
@@ -121,8 +72,8 @@ const LoginRedux:React.FC =()=>{
           Current password: {inputPassword}
         </div>
       </div>
-        </div>
-    )
+    </div>
+  );
 }
 
 export default LoginRedux;

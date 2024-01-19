@@ -6,7 +6,7 @@ import About from './views/About/index';
 import Homepage from './views/Home/index';
 import NotFound from './views/NotFound/index';
 import LoginContainer from './containers/LoginContainer';
-import LoginRedux from './views/LoginRedux/index';
+import LoginReduxContainer from './containers/ReduxLoginContainer';
 import ReduxSuccess from './views/Redux-Success/index';
 
 function App() {
@@ -60,7 +60,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/counters" element={<Counters />} />
         <Route path="/login" element={<LoginContainer />} />
-        <Route path="/login-redux" element={<LoginRedux />} />
+        <Route path="/login-redux" element={<LoginReduxContainer />} />
         <Route path="/login-redux/success" element={<ReduxSuccess />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

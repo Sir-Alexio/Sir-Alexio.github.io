@@ -1,26 +1,25 @@
-import React, { useState, ChangeEvent, KeyboardEvent } from "react";
+import React, {KeyboardEvent, useEffect } from "react";
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Alert from '@mui/material/Alert';
+import {ValidationContainer} from '../../Services/ValidationService';
 import './styles.css'
-
-interface IData {
-  email: string;
-  password: string;
-}
 
 interface InformationProps {
   notification: string;
-  emailError: string;
-  passError: string;
-  data: IData;
-  onEmailChange: (event: ChangeEvent<HTMLInputElement>) => void;
   onEnterPress: (event: KeyboardEvent<HTMLInputElement>) => void;
-  onPasswordFieldChange: (event: ChangeEvent<HTMLInputElement>) => void;
   onButtonClick: () => void;
 }
 
 const Login: React.FC<InformationProps> = (props) => {
+  //Используем общую логику валидации и отображения введенных данных
+  const { emailError, passError, onEmailChange, onPasswordChange, inputLogin,inputPassword,reset } = ValidationContainer();
+
+  //Удаляем все введенные данные, если обновили страницу
+  useEffect(() => {
+    reset();
+  }, []);
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', color: 'white', padding: '20px', margin: '100px' }}>
       {props.notification && (
@@ -42,11 +41,11 @@ const Login: React.FC<InformationProps> = (props) => {
         }}
         placeholder="Enter your login"
         style={{ margin: '10px' }}
-        onChange={props.onEmailChange}
-        error={Boolean(props.emailError)}
-        helperText={props.emailError}
-        value={props.data.email}
+        onChange={onEmailChange}
+        error={Boolean(emailError)}
+        helperText={emailError}
         onKeyDown={props.onEnterPress}
+        value={inputLogin}
       />
       <TextField
         id="outlined-basic"
@@ -60,12 +59,12 @@ const Login: React.FC<InformationProps> = (props) => {
         }}
         placeholder="Enter your password"
         style={{ margin: '10px' }}
-        onChange={props.onPasswordFieldChange}
-        error={Boolean(props.passError)}
-        helperText={props.passError}
+        onChange={onPasswordChange}
+        error={Boolean(passError)}
+        helperText={passError}
         type="password"
-        value={props.data.password}
         onKeyDown={props.onEnterPress}
+        value={inputPassword}
       />
       <Button
         variant="outlined"
@@ -76,10 +75,10 @@ const Login: React.FC<InformationProps> = (props) => {
       </Button>
       <div className="counter-block" style={{ marginTop: '20px', fontSize: '18px', color: 'white', margin: '70px' }}>
         <div style={{ color: 'white', fontSize: '16px', margin: '10px' }}>
-          Current email: {props.data.email}
+          Current email: {inputLogin}
         </div>
         <div style={{ color: 'white', fontSize: '16px', margin: '10px' }}>
-          Current password: {props.data.password}
+          Current password: {inputPassword}
         </div>
       </div>
     </div>
