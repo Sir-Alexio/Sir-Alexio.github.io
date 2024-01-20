@@ -8,6 +8,7 @@ import NotFound from './views/NotFound/index';
 import LoginContainer from './containers/LoginContainer';
 import LoginReduxContainer from './containers/ReduxLoginContainer';
 import ReduxSuccess from './views/Redux-Success/index';
+import LoginFormik from './views/LoginFormik/index';
 
 function App() {
   const location = useLocation();
@@ -52,6 +53,15 @@ function App() {
               backgroundColor: location.pathname === '/login-redux' ? '#1a1d23' : 'transparent',
             }}
           />
+          <Tab
+            label="Login Formik"
+            component={Link}
+            to="/login-formik"
+            style={{
+              color: 'white',
+              backgroundColor: location.pathname === '/login-formik' ? '#1a1d23' : 'transparent',
+            }}
+          />
         </Tabs>
       </AppBar>
 
@@ -62,6 +72,7 @@ function App() {
         <Route path="/login" element={<LoginContainer />} />
         <Route path="/login-redux" element={<LoginReduxContainer />} />
         <Route path="/login-redux/success" element={<ReduxSuccess />} />
+        <Route path="/login-formik" element={<LoginFormik />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
