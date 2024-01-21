@@ -9,6 +9,7 @@ import LoginContainer from './containers/LoginContainer';
 import LoginReduxContainer from './containers/ReduxLoginContainer';
 import ReduxSuccess from './views/Redux-Success/index';
 import LoginFormik from './views/LoginFormik/index';
+import FormikSuccess from './views/FormikSuccess/index';
 
 function App() {
   const location = useLocation();
@@ -72,6 +73,7 @@ function App() {
         <Route path="/login" element={<LoginContainer />} />
         <Route path="/login-redux" element={<LoginReduxContainer />} />
         <Route path="/login-redux/success" element={<ReduxSuccess />} />
+        <Route path="/login-formik/success" element={<FormikSuccess />} />
         <Route path="/login-formik" element={<LoginFormik />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
