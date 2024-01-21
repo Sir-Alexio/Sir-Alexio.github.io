@@ -71,8 +71,8 @@ const Basic: React.FC = () => {
       border: '1px solid #ccc',
       width: '300px',
       fontSize: '16px',
-      background: 'transparent', // Прозрачный фон
-      color: 'white', // Белый текст
+      background: 'transparent',
+      color: 'white',
     }}
   />
   {errors.email && touched.email && <div style={{ color: 'red' }}>{errors.email}</div>}
@@ -90,8 +90,8 @@ const Basic: React.FC = () => {
       border: '1px solid #ccc',
       width: '300px',
       fontSize: '16px',
-      background: 'transparent', // Прозрачный фон
-      color: 'white', // Белый текст
+      background: 'transparent',
+      color: 'white',
     }}
   />
   {errors.password && touched.password && <div style={{ color: 'red' }}>{errors.password}</div>}
