@@ -6,6 +6,9 @@ type PasswordValidationAction = { type: 'PASS_ERROR' };
 type PasswordValidationSuccess = { type: 'PASS_SUCCESS' };
 type ResetErrors = { type: 'RESET_ERRORS' };
 type ResetData = { type: 'RESET_DATA' };
+type RandomActivity = {type:'FETCH_TASKS_SUCCESS' ,payload:{
+  activity:string;
+}};
 
 type LoginField = { type: 'LOGIN', payload: {
   email:string,
@@ -20,6 +23,18 @@ type Notification = { type: 'NOTIFICATION', payload: {
 
 type ResetNotification = { type: 'RESET_NOTIFICATION' };
 
+export const randomActivity = (inputActivity:string): RandomActivity => ({
+  type: 'FETCH_TASKS_SUCCESS' ,
+  payload: {
+    activity:inputActivity
+  }
+});
+
+export const randomActivityError = ()  => ({
+  type: 'FETCH_TASKS_FAILURE' ,
+});
+
+export const fetchData = () => ({ type: 'FETCH_DATA' });
 
 export const validateEmail = (): EmailValidationAction => ({
   type: 'EMAIL_ERROR',

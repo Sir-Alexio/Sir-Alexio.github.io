@@ -1,29 +1,40 @@
 
 import React from "react";
-interface IEmailValidationState{
+interface IState{
     emailError:string;
     passError:string;
     loginField:string;
     passwordField:string;
     notification:string;
+    randomActivity:string;
+    activityError:string;
 }
 
-const EmailValidationInitialState:IEmailValidationState = {
+const InitialState:IState = {
     emailError: '',
     passError:'',
     loginField:'',
     passwordField:'',
     notification:'',
+    randomActivity:'',
+    activityError:'',
 }
 
 
-type ErrorAction = { type: 'EMAIL_ERROR'} | 
+type Action = { type: 'EMAIL_ERROR'} | 
                     { type: 'EMAIL_SUCCESS'} |  
                     { type: 'PASS_ERROR'} | 
+                    { type: 'FETCH_DATA'} | 
                     { type: 'PASS_SUCCESS'}|
                     { type: 'RESET_ERRORS'} |
                     { type: 'RESET_DATA'} |
                     { type: 'RESET_NOTIFICATION'} |
+                    { type: 'FETCH_TASKS_FAILURE',payload: {
+                        error:string,
+                      }} |
+                    { type: 'FETCH_TASKS_SUCCESS' ,payload: {
+                        activity:string,
+                      }} |
                     { type: 'LOGIN',
                         payload: {
                         email:string,
@@ -37,7 +48,7 @@ type ErrorAction = { type: 'EMAIL_ERROR'} |
                         password:string,
                       }};
 
-const ValidationReducer = (state:IEmailValidationState = EmailValidationInitialState, action:ErrorAction)=>{
+const ValidationReducer = (state:IState = InitialState, action:Action)=>{
     switch (action.type) {
         case 'EMAIL_ERROR':
             return state ? { ...state, emailError: 'Invalid email format.' } : state;
@@ -50,6 +61,12 @@ const ValidationReducer = (state:IEmailValidationState = EmailValidationInitialS
 
         case 'PASS_SUCCESS':
             return state ? { ...state, passError: '' } : state;
+
+        case 'FETCH_TASKS_SUCCESS':
+            return state ? { ...state, randomActivity: action.payload.activity } : state;
+
+        case 'FETCH_TASKS_FAILURE':
+            return state ? { ...state, activityError:action.payload.error  } : state;
 
         case 'LOGIN':
             return state ? { ...state, loginField: action.payload.email } : state;
@@ -70,7 +87,7 @@ const ValidationReducer = (state:IEmailValidationState = EmailValidationInitialS
             return state ? { ...state, loginField:'',passwordField:''} : state;
 
         default:
-            return state || EmailValidationInitialState;
+            return state || InitialState;
     }
 }
 export default ValidationReducer;
