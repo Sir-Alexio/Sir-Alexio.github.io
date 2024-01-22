@@ -2,6 +2,9 @@ import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { fetchData } from "../../redux/Actions/actions";
+import Typography from '@mui/material/Typography';
+import TextField from '@mui/material/TextField';
+import Alert from '@mui/material/Alert';
 
 
 
@@ -13,7 +16,7 @@ interface IRandomActivity{
 
 const RandomActivity:React.FC = ()=>{
   const dispatch = useDispatch();
-  const myrandomActivity = useSelector((state:IRandomActivity)=>state.randomActivity);
+  const myRandomActivity = useSelector((state:IRandomActivity)=>state.randomActivity);
   const apiError = useSelector((state:IRandomActivity)=>state.activityError);
 
   useEffect(() => {
@@ -22,10 +25,40 @@ const RandomActivity:React.FC = ()=>{
   }, [dispatch]);
 
     return (<div>
-        <h3>random activity</h3>
-        {{myrandomActivity} && (<h3>activity:{myrandomActivity}</h3>)}
-        {{apiError} && (<h3>error:{apiError}</h3>)}
-    </div>)
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', color: 'white', padding: '20px', margin: '88px'}}>
+      {apiError && (
+        <div style={{ position: 'fixed', top: 20, right: 20, zIndex: 9999 }}>
+          <Alert variant="filled" severity="error">
+            {apiError}
+          </Alert>
+        </div>
+      )}
+      <Typography variant="h5" style={{ color: 'white', marginBottom: '10px', textShadow: '0px 0px 1px white' } }>
+        RANDOM ACTIVITY
+        </Typography>
+        <TextField
+        id="standard-basic"
+        label="Activity"
+        variant="standard"
+        multiline
+        InputProps={{
+          readOnly: true,
+          style: {
+            color: 'white',
+            borderBottom: '1px solid white',
+            marginBottom: '25.92px',
+            width: '395.2px', 
+            marginTop: '10px',
+          },
+        }}
+        InputLabelProps={{
+          style: { color: 'white', background: 'black' },
+        }}
+        value={myRandomActivity}
+      />
+      </div>
+    </div>
+    )
 }
 
 export default RandomActivity;

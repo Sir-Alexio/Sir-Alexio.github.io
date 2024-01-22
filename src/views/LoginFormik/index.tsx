@@ -50,12 +50,11 @@ const Basic: React.FC = () => {
         handleBlur,
         handleSubmit,
         isSubmitting,
-        /* and other goodies */
       }) => (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', color: 'white', padding: '20px', margin: '58px' }}>
         <Typography variant="h5" style={{ color: 'white', marginBottom: '10px', textShadow: '0px 0px 1px white' }}>
         FORMIK
-      </Typography>
+        </Typography>
         <form onSubmit={handleSubmit}>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
   <input

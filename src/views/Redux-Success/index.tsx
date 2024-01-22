@@ -4,7 +4,6 @@ import TextField from '@mui/material/TextField';
 import Avatar from '@mui/material/Avatar';
 import Image from './image.png';
 import Alert from '@mui/material/Alert';
-import CheckIcon from '@mui/icons-material/Check';
 
 import {
   creteNotification,

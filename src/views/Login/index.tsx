@@ -12,10 +12,8 @@ interface InformationProps {
 }
 
 const Login: React.FC<InformationProps> = (props) => {
-  //Используем общую логику валидации и отображения введенных данных
   const { emailError, passError, onEmailChange, onPasswordChange, inputLogin,inputPassword,reset } = ValidationContainer();
 
-  //Удаляем все введенные данные, если обновили страницу
   useEffect(() => {
     reset();
   }, []);
