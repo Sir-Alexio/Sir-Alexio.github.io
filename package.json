@@ -30,7 +30,7 @@
   },
   "scripts": {
     "homepage": "https://sir-alexio.github.io/Task7-Saga-Development",
-    "deploy": "gh-pages -d build -b saga-deploy",
+    "deploy": "gh-pages -d build -b deploy",
     "predeploy": "npm run build",
     "start": "react-scripts start",
     "build": "react-scripts build",
