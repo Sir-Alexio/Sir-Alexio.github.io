@@ -29,8 +29,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "homepage": "https://sir-alexio.github.io/Task5-Redux-Development",
-    "deploy": "gh-pages -d build -b task5-deploy",
+    "homepage": "https://sir-alexio.github.io/Task7-Saga-Development",
+    "deploy": "gh-pages -d build -b task7-deploy",
     "predeploy": "npm run build",
     "start": "react-scripts start",
     "build": "react-scripts build",
