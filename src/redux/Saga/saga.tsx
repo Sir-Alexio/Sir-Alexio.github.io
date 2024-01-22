@@ -9,7 +9,7 @@ interface IDataActivity{
 
 function* fetchDataSaga() {
   try {
-    const response:IDataActivity = yield call(axios.get, 'http://www.boredapi.com/api/activity/');
+    const response:IDataActivity = yield call(axios.get, 'https://www.boredapi.com/api/activity/');
     
     yield put({ type: 'FETCH_TASKS_SUCCESS', payload:{activity:response.data.activity}  });
   } catch (apiError:any) {
