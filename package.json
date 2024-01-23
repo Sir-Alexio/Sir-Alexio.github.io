@@ -31,8 +31,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "homepage": "https://sir-alexio.github.io/Task7-Saga-Development",
-    "deploy": "gh-pages -d build -b deploy",
+    "homepage": "https://sir-alexio.github.io/Task8-MST-Development",
+    "deploy": "gh-pages -d build -b mst-deploy",
     "predeploy": "npm run build",
     "start": "react-scripts start",
     "build": "react-scripts build",
