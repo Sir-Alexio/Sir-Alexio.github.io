@@ -9,7 +9,7 @@ loginField,
 passwordField,
 resetData,
 resetErrors} 
-from 'D:/work/React/my-react-app/src/redux/Actions/actions';
+from '../redux/Actions/actions';
 
 interface IEmailValidationState {
     emailError: string;

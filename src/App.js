@@ -11,6 +11,8 @@ import ReduxSuccess from './views/Redux-Success/index';
 import LoginFormik from './views/LoginFormik/index';
 import FormikSuccess from './views/FormikSuccess/index';
 import RandomActivity from './views/RandomActivity/index';
+import MstSuccess from './views/MstSuccess';
+import MstContainer from './containers/MstContainer'
 
 function App() {
   const location = useLocation();
@@ -73,6 +75,15 @@ function App() {
               backgroundColor: location.pathname === '/get-activity-saga' ? '#1a1d23' : 'transparent',
             }}
           />
+          <Tab
+            label="Login MST"
+            component={Link}
+            to="/login-mst"
+            style={{
+              color: 'white',
+              backgroundColor: location.pathname === '/login-mst' ? '#1a1d23' : 'transparent',
+            }}
+          />
         </Tabs>
       </AppBar>
 
@@ -84,8 +95,10 @@ function App() {
         <Route path="/login-redux" element={<LoginReduxContainer />} />
         <Route path="/login-redux/success" element={<ReduxSuccess />} />
         <Route path="/login-formik/success" element={<FormikSuccess />} />
+        <Route path="/login-mst/success" element={<MstSuccess />} />
         <Route path="/login-formik" element={<LoginFormik />} />
         <Route path="/get-activity-saga" element={<RandomActivity />} />
+        <Route path="/login-mst" element={<MstContainer />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
