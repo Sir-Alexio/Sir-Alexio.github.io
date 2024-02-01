@@ -5,7 +5,10 @@ const Styles = {
         marginRight: '10px',
         width: '130px',
         height: '40px',
-      }
+      },
+    counterStyle:{
+      marginBottom: '10px' 
+    }
 }
 
 export default Styles

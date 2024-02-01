@@ -1,15 +1,9 @@
 
 import React from 'react';
 import Counter from '../views/index';
+import {ICounterContainer, StateType} from '../Interfaces/index';
 
-interface ICounterComponent{
-    state:object;
-    onIncrementClick: ()=> void;
-    onDecrementClick: ()=> void;
-    onResetClick: ()=> void;
-}
-
-class CounterContainer extends React.Component<ICounterComponent>{
+class CounterContainer extends React.Component<ICounterContainer,StateType>{
     state = {
         currentCounter: 0
     }
@@ -33,10 +27,10 @@ class CounterContainer extends React.Component<ICounterComponent>{
     }
 
     render(){
-        return <Counter currentCounter={this.state.currentCounter}
-                        onIncrement={this.onIncrementClick} 
-                        onDecrement={this.onDecrementClick} 
-                        onReset={this.onResetClick} />
+        return <Counter state ={this.state}
+                onIncrementClick={this.onIncrementClick} 
+                onDecrementClick={this.onDecrementClick} 
+                onResetClick={this.onResetClick} />
     }
 }
 
