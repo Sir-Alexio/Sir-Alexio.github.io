@@ -1,7 +1,6 @@
 
 import React from 'react';
 import Counter from '../views/index';
-import PropTypes from 'prop-types'
 
 class CounterContainer extends React.Component{
     state = {
@@ -27,19 +26,13 @@ class CounterContainer extends React.Component{
     }
 
     render(){
-        return <Counter currentCounter={this.state.currentCounter}
+        const {currentCounter} = this.state;
+        return <Counter currentCounter={currentCounter}
                         onIncrement={this.onIncrementClick} 
                         onDecrement={this.onDecrementClick} 
                         onReset={this.onResetClick} />
     }
 }
-
-CounterContainer.propTypes = {
-    currentCounter: PropTypes.number,
-    onIncrement: PropTypes.func,
-    onDecrement: PropTypes.func,
-    onReset: PropTypes.func
-  };
 
 export default CounterContainer;
 

@@ -3,18 +3,19 @@ import Styles from './styles';
 import PropTypes from 'prop-types'
 import Button from '@mui/material/Button';
 
-
 const Counter = (props)=>{
+    const {currentCounter,onIncrement,onDecrement,onReset} = props;
+
     return (
     <div>
-        <div style={{ marginBottom: '10px' }}>Current count: {props.currentCounter}</div>
-        <Button style={Styles.buttonStyle} onClick={props.onIncrement} variant="contained" color="primary">
+        <div style={Styles.counterStyle}>Current count: {currentCounter}</div>
+        <Button style={Styles.buttonStyle} onClick={onIncrement} variant="contained" color="primary">
             Increment
         </Button>
-        <Button style={Styles.buttonStyle} onClick={props.onDecrement} variant="contained" color="primary">
+        <Button style={Styles.buttonStyle} onClick={onDecrement} variant="contained" color="primary">
             Decrement
         </Button>
-        <Button style={Styles.buttonStyle} onClick={props.onReset} variant="contained" color="primary">
+        <Button style={Styles.buttonStyle} onClick={onReset} variant="contained" color="primary">
             Reset
         </Button>
     </div>
@@ -24,5 +25,8 @@ const Counter = (props)=>{
 export default Counter;
 
 Counter.propTypes = {
-    props: PropTypes.object
+    currentCounter: PropTypes.number,
+    onIncrement: PropTypes.func,
+    onDecrement: PropTypes.func,
+    onReset: PropTypes.func
 }
