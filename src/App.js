@@ -1,26 +1,29 @@
-import './styles.css'
-import {Routes, Route, Link, NavLink,useLocation } from 'react-router-dom';
-import { AppBar, Tab, Tabs} from '@mui/material';
+import "./styles.css";
+import { Routes, Route, Link, useLocation } from "react-router-dom";
+import { AppBar, Tab, Tabs } from "@mui/material";
 
-import Counters from './containers/CounterContainer';
-import About from './views/About/index';
-import Homepage from './views/Home/index';
-import NotFound from './views/NotFound/index';
+import Counters from "./containers/CounterContainer";
+import About from "./views/About/index";
+import Homepage from "./views/Home/index";
+import NotFound from "./views/NotFound/index";
+
+const appBarColor = "#0f1116";
 
 function App() {
   const location = useLocation();
 
   return (
     <>
-      <AppBar position="static" style={{ backgroundColor: '#0f1116' }}>
-        <Tabs style={{ backgroundColor: '#0f1116' }}>
+      <AppBar position="static" style={{ backgroundColor: appBarColor }}>
+        <Tabs>
           <Tab
             label="About"
             component={Link}
             to="/about"
             style={{
-              color: 'white',
-              backgroundColor: location.pathname === '/about' ? '#1a1d23' : 'transparent',
+              color: "white",
+              backgroundColor:
+                location.pathname === "/about" ? "#1a1d23" : "transparent",
             }}
           />
           <Tab
@@ -28,8 +31,9 @@ function App() {
             component={Link}
             to="/counters"
             style={{
-              color: 'white',
-              backgroundColor: location.pathname === '/counters' ? '#1a1d23' : 'transparent',
+              color: "white",
+              backgroundColor:
+                location.pathname === "/counters" ? "#1a1d23" : "transparent",
             }}
           />
         </Tabs>
@@ -45,4 +49,4 @@ function App() {
   );
 }
 
-export default App; 
+export default App;

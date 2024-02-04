@@ -1,24 +1,37 @@
 body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-      sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    background-color: #0f1116; /* Обновленный цвет страницы */
-    color: white;
-  }
-  
-  header {
-    width: 100%;
-    background-color: #0F1116; /* Обновленный цвет шапки */
-    padding: 20px;
-  }
-  
-  header a {
-    margin-right: 15px;
-    color: white; /* Цвет текста табов */
-    text-decoration: none;
-    font-size: 18px; /* Обновленный размер текста табов */
-    font-weight: normal; /* Обновленная жирность текста табов */
-  }
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #0f1116;
+  color: white;
+}
+
+header {
+  width: 100%;
+  background-color: #0f1116;
+  padding: 20px;
+}
+
+header a {
+  margin-right: 15px;
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: normal;
+}
+
+.app-bar {
+  background-color: #0f1116;
+}
+
+.tab {
+  color: white;
+  background-color: transparent !important;
+}
+
+.active-tab {
+  background-color: #1a1d23;
+}

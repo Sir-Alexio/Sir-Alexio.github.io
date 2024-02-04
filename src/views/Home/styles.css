@@ -1,0 +1,21 @@
+.homepage-style {
+  max-width: 800px;
+  margin: auto;
+  color: white;
+  text-align: center;
+  padding-top: 50px;
+}
+
+.title {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.info {
+  font-size: 20px;
+}
+
+.conclusion {
+  font-size: 20px;
+  margin-top: 20px;
+}
