@@ -1,76 +1,61 @@
+import { types } from "../Actions/types";
+import { ActionWithPayload } from "../Actions/entity/entity";
 
-import React from "react";
-interface IEmailValidationState{
-    emailError:string;
-    passError:string;
-    loginField:string;
-    passwordField:string;
-    notification:string;
+interface IEmailValidationState {
+  emailError: string;
+  passError: string;
+  loginField: string;
+  passwordField: string;
+  notification: string;
 }
 
-const EmailValidationInitialState:IEmailValidationState = {
-    emailError: '',
-    passError:'',
-    loginField:'',
-    passwordField:'',
-    notification:'',
-}
+const EmailValidationInitialState: IEmailValidationState = {
+  emailError: "",
+  passError: "",
+  loginField: "",
+  passwordField: "",
+  notification: "",
+};
 
+const ValidationReducer = (
+  state: IEmailValidationState = EmailValidationInitialState,
+  action: ActionWithPayload<{ email: string; password: string; text: string }>
+) => {
+  switch (action.type) {
+    case types.AUTH.EMAIL_VALIDATION.ERROR:
+      return state ? { ...state, emailError: "Invalid email format." } : state;
 
-type ErrorAction = { type: 'EMAIL_ERROR'} | 
-                    { type: 'EMAIL_SUCCESS'} |  
-                    { type: 'PASS_ERROR'} | 
-                    { type: 'PASS_SUCCESS'}|
-                    { type: 'RESET_ERRORS'} |
-                    { type: 'RESET_DATA'} |
-                    { type: 'RESET_NOTIFICATION'} |
-                    { type: 'LOGIN',
-                        payload: {
-                        email:string,
-                      }}| 
-                    { type: 'NOTIFICATION',
-                      payload: {
-                      text:string,
-                    }}| 
-                    { type: 'PASSWORD',
-                        payload: {
-                        password:string,
-                      }};
+    case types.AUTH.EMAIL_VALIDATION.SUCCESS:
+      return state ? { ...state, emailError: "" } : state;
 
-const ValidationReducer = (state:IEmailValidationState = EmailValidationInitialState, action:ErrorAction)=>{
-    switch (action.type) {
-        case 'EMAIL_ERROR':
-            return state ? { ...state, emailError: 'Invalid email format.' } : state;
+    case types.AUTH.PASSWORD_VALIDATION.ERROR:
+      return state ? { ...state, passError: "Less then 6 characters." } : state;
 
-        case 'EMAIL_SUCCESS':
-            return state ? { ...state, emailError: '' } : state;
+    case types.AUTH.PASSWORD_VALIDATION.SUCCESS:
+      return state ? { ...state, passError: "" } : state;
 
-        case 'PASS_ERROR':
-            return state ? { ...state, passError: 'Less then 6 characters.' } : state;
+    case types.AUTH.LOGIN:
+      return state ? { ...state, loginField: action.payload.email } : state;
 
-        case 'PASS_SUCCESS':
-            return state ? { ...state, passError: '' } : state;
+    case types.AUTH.PASSWORD:
+      return state
+        ? { ...state, passwordField: action.payload.password }
+        : state;
 
-        case 'LOGIN':
-            return state ? { ...state, loginField: action.payload.email } : state;
+    case types.NOTIFICATION.SUCCESS:
+      return state ? { ...state, notification: action.payload.text } : state;
 
-        case 'PASSWORD':
-            return state ? { ...state, passwordField: action.payload.password } : state;
+    case types.ERRORS.RESET:
+      return state ? { ...state, emailError: "", passError: "" } : state;
 
-        case 'NOTIFICATION':
-            return state ? { ...state, notification: action.payload.text } : state;
+    case types.NOTIFICATION.RESET:
+      return state ? { ...state, notification: "" } : state;
 
-        case 'RESET_ERRORS':
-            return state ? { ...state, emailError:'',passError:''} : state;
+    case types.AUTH.DATA.RESET:
+      return state ? { ...state, loginField: "", passwordField: "" } : state;
 
-        case 'RESET_NOTIFICATION':
-            return state ? { ...state, notification:''} : state;
-
-        case 'RESET_DATA':
-            return state ? { ...state, loginField:'',passwordField:''} : state;
-
-        default:
-            return state || EmailValidationInitialState;
-    }
-}
+    default:
+      return state || EmailValidationInitialState;
+  }
+};
 export default ValidationReducer;
