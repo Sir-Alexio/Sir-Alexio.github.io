@@ -53,6 +53,10 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^6.1.1"
+    "gh-pages": "^6.1.1",
+    "tsconfig-paths": "^4.2.0",
+    "tsconfig-paths-webpack-plugin": "^4.1.0",
+    "webpack": "^5.90.1",
+    "webpack-cli": "^5.1.4"
   }
 }
