@@ -1,87 +1,63 @@
+import {
+  EmailValidationSuccess,
+  EmailValidationAction,
+  PasswordValidationAction,
+  PasswordValidationSuccess,
+  ResetErrors,
+  ResetData,
+  LoginField,
+  PassField,
+  SuccessNotification,
+  ResetNotification,
+} from "./actionTypes";
 
-type EmailValidationAction = { type: 'EMAIL_ERROR' };
-type EmailValidationSuccess = { type: 'EMAIL_SUCCESS' };
-
-type PasswordValidationAction = { type: 'PASS_ERROR' };
-type PasswordValidationSuccess = { type: 'PASS_SUCCESS' };
-type ResetErrors = { type: 'RESET_ERRORS' };
-type ResetData = { type: 'RESET_DATA' };
-type RandomActivity = {type:'FETCH_TASKS_SUCCESS' ,payload:{
-  activity:string;
-}};
-
-type LoginField = { type: 'LOGIN', payload: {
-  email:string,
-}};
-type PassField = { type: 'PASSWORD', payload: {
-  password:string,
-}};
-
-type Notification = { type: 'NOTIFICATION', payload: {
-  text:string,
-}};
-
-type ResetNotification = { type: 'RESET_NOTIFICATION' };
-
-export const randomActivity = (inputActivity:string): RandomActivity => ({
-  type: 'FETCH_TASKS_SUCCESS' ,
-  payload: {
-    activity:inputActivity
-  }
-});
-
-export const randomActivityError = ()  => ({
-  type: 'FETCH_TASKS_FAILURE' ,
-});
-
-export const fetchData = () => ({ type: 'FETCH_DATA' });
+import { types } from "./types";
 
 export const validateEmail = (): EmailValidationAction => ({
-  type: 'EMAIL_ERROR',
+  type: types.AUTH.EMAIL_VALIDATION.ERROR,
 });
 
-export const successEmail = (): EmailValidationSuccess =>({
-  type: 'EMAIL_SUCCESS',
-})
+export const successEmail = (): EmailValidationSuccess => ({
+  type: types.AUTH.EMAIL_VALIDATION.SUCCESS,
+});
 
 export const validatePassword = (): PasswordValidationAction => ({
-  type: 'PASS_ERROR',
+  type: types.AUTH.PASSWORD_VALIDATION.ERROR,
 });
 
-export const successPassword = (): PasswordValidationSuccess =>({
-  type: 'PASS_SUCCESS',
-})
+export const successPassword = (): PasswordValidationSuccess => ({
+  type: types.AUTH.PASSWORD_VALIDATION.SUCCESS,
+});
 
 export const resetErrors = (): ResetErrors => ({
-  type: 'RESET_ERRORS',
+  type: types.ERRORS.RESET,
 });
 
 export const resetData = (): ResetData => ({
-  type: 'RESET_DATA',
+  type: types.AUTH.DATA.RESET,
 });
 
-export const loginField = (inputText:string): LoginField => ({
-  type: 'LOGIN',
+export const loginField = (inputText: string): LoginField => ({
+  type: types.AUTH.LOGIN,
   payload: {
-    email:inputText
-  }
+    email: inputText,
+  },
 });
 
-export const passwordField = (inputText:string): PassField =>({
-  type: 'PASSWORD',
+export const passwordField = (inputText: string): PassField => ({
+  type: types.AUTH.PASSWORD,
   payload: {
-    password:inputText,
-  }
-})
+    password: inputText,
+  },
+});
 
-export const creteNotification = (inputText:string): Notification => ({
-  type: 'NOTIFICATION',
+export const createNotification = (inputText: string): SuccessNotification => ({
+  type: types.NOTIFICATION.SUCCESS,
   payload: {
-    text:inputText
-  }
+    text: inputText,
+  },
 });
 
 export const resetNotification = (): ResetNotification => ({
-  type: 'RESET_NOTIFICATION',
+  type: types.NOTIFICATION.RESET,
 });
-
