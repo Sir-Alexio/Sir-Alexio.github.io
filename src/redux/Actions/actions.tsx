@@ -9,9 +9,12 @@ import {
   PassField,
   SuccessNotification,
   ResetNotification,
+  FetchData,
 } from "./actionTypes";
 
 import { types } from "./types";
+
+export const fetchData = (): FetchData => ({ type: types.ACTIVITY.DATA });
 
 export const validateEmail = (): EmailValidationAction => ({
   type: types.AUTH.EMAIL_VALIDATION.ERROR,

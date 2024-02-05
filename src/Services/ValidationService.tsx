@@ -40,7 +40,6 @@ export const useLoginFormState = () => {
   const onEmailChange = useCallback(
     (email: string) => {
       let regex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
-      // let email = event.target.value;
 
       dispatch(loginField(email));
 
@@ -55,8 +54,6 @@ export const useLoginFormState = () => {
 
   const onPasswordChange = useCallback(
     (password: string) => {
-      //let password = event.target.value;
-
       dispatch(passwordField(password));
 
       if (password.length <= 6 && password.length >= 1) {

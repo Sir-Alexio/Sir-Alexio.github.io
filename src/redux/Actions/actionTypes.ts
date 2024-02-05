@@ -5,6 +5,7 @@ export type EmailValidationSuccess = Action;
 
 export type PasswordValidationAction = Action;
 export type PasswordValidationSuccess = Action;
+export type FetchData = Action;
 
 export type ResetErrors = Action;
 export type ResetData = Action;

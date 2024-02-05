@@ -1,24 +1,32 @@
-import { takeLatest, call, put } from 'redux-saga/effects';
-import axios, { AxiosError } from 'axios';
+import { takeLatest, call, put } from "redux-saga/effects";
+import axios from "axios";
+import { types } from "../Actions/types";
 
-interface IDataActivity{
-    data:{
-        activity:string;
-    }
+interface IDataActivity {
+  data: {
+    activity: string;
+  };
 }
 
 function* fetchDataSaga() {
+  const url = "https://www.boredapi.com/api/activity/";
   try {
-    const response:IDataActivity = yield call(axios.get, 'https://www.boredapi.com/api/activity/');
-    
-    yield put({ type: 'FETCH_TASKS_SUCCESS', payload:{activity:response.data.activity}  });
-  } catch (apiError:any) {
-    console.log('Api error: ',apiError);
-    
-    yield put({ type: 'FETCH_TASKS_FAILURE', payload:{error: apiError.message} });
+    const response: IDataActivity = yield call(axios.get, url);
+
+    yield put({
+      type: types.ACTIVITY.SUCCESS,
+      payload: { activity: response.data.activity },
+    });
+  } catch (apiError: any) {
+    console.log("Api error: ", apiError);
+
+    yield put({
+      type: types.ACTIVITY.ERROR,
+      payload: { error: apiError.message },
+    });
   }
 }
 
 export function* watchFetchData() {
-  yield takeLatest('FETCH_DATA', fetchDataSaga);
+  yield takeLatest(types.ACTIVITY.DATA, fetchDataSaga);
 }

@@ -19,7 +19,13 @@ const EmailValidationInitialState: IEmailValidationState = {
 
 const ValidationReducer = (
   state: IEmailValidationState = EmailValidationInitialState,
-  action: ActionWithPayload<{ email: string; password: string; text: string }>
+  action: ActionWithPayload<{
+    email: string;
+    password: string;
+    text: string;
+    activity: string;
+    error: string;
+  }>
 ) => {
   switch (action.type) {
     case types.AUTH.EMAIL_VALIDATION.ERROR:
@@ -53,6 +59,18 @@ const ValidationReducer = (
 
     case types.AUTH.DATA.RESET:
       return state ? { ...state, loginField: "", passwordField: "" } : state;
+
+    case types.ACTIVITY.SUCCESS:
+      return state
+        ? {
+            ...state,
+            randomActivity: action.payload.activity,
+            activityError: "",
+          }
+        : state;
+
+    case types.ACTIVITY.ERROR:
+      return state ? { ...state, activityError: action.payload.error } : state;
 
     default:
       return state || EmailValidationInitialState;

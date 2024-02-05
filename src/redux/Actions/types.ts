@@ -21,4 +21,9 @@ export const types = {
   ERRORS: {
     RESET: "ERRORS.RESET",
   },
+  ACTIVITY: {
+    DATA: "FETCH_DATA",
+    SUCCESS: "FETCH_TASKS_SUCCESS",
+    ERROR: "FETCH_TASKS_FAILURE",
+  },
 };
