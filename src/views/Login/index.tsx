@@ -1,4 +1,4 @@
-import React, { KeyboardEvent, useEffect } from "react";
+import React, { KeyboardEvent, useCallback, useEffect } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Alert from "@mui/material/Alert";
@@ -27,6 +27,20 @@ const Login: React.FC<InformationProps> = (props) => {
   useEffect(() => {
     reset();
   }, []);
+
+  const LoginEmailChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      onEmailChange(event.target.value);
+    },
+    [onEmailChange]
+  );
+
+  const LoginPasswordChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      onPasswordChange(event.target.value);
+    },
+    [onPasswordChange]
+  );
 
   return (
     <div
@@ -62,7 +76,7 @@ const Login: React.FC<InformationProps> = (props) => {
         }}
         placeholder="Enter your login"
         style={{ margin: "10px" }}
-        onChange={onEmailChange}
+        onChange={LoginEmailChange}
         error={Boolean(emailError)}
         helperText={emailError}
         onKeyDown={props.onEnterPress}
@@ -84,7 +98,7 @@ const Login: React.FC<InformationProps> = (props) => {
         }}
         placeholder="Enter your password"
         style={{ margin: "10px" }}
-        onChange={onPasswordChange}
+        onChange={LoginPasswordChange}
         error={Boolean(passError)}
         helperText={passError}
         type="password"

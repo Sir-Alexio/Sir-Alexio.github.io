@@ -38,9 +38,9 @@ export const useLoginFormState = () => {
   const dispatch = useDispatch();
 
   const onEmailChange = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
+    (email: string) => {
       let regex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
-      let email = event.target.value;
+      // let email = event.target.value;
 
       dispatch(loginField(email));
 
@@ -54,8 +54,8 @@ export const useLoginFormState = () => {
   );
 
   const onPasswordChange = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      let password = event.target.value;
+    (password: string) => {
+      //let password = event.target.value;
 
       dispatch(passwordField(password));
 

@@ -24,7 +24,8 @@
     "react-scripts": "^5.0.1",
     "redux": "^5.0.1",
     "typescript": "^3.2.1 || ^4",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "yup": "^1.3.3"
   },
   "scripts": {
     "homepage": "https://sir-alexio.github.io/Task5-Redux-Development",
