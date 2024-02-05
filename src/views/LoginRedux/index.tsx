@@ -1,16 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useLoginFormState } from "../../Services/ValidationService";
 import Typography from "@mui/material/Typography";
 import "./styles.css";
 
-interface ILoginRedux {
-  onButtonClick: () => void;
-  onEnterClick: (event: React.KeyboardEvent<HTMLInputElement>) => void;
+interface LoginReduxProps {
+  onFormSubmit: () => void;
 }
 
-const LoginRedux: React.FC<ILoginRedux> = (props) => {
+const LoginRedux: React.FC<LoginReduxProps> = (props) => {
   const {
     emailError,
     passError,
@@ -20,6 +19,15 @@ const LoginRedux: React.FC<ILoginRedux> = (props) => {
     inputPassword,
     reset,
   } = useLoginFormState();
+
+  const onEnterClick = useCallback(
+    (event: React.KeyboardEvent<HTMLInputElement>) => {
+      if (event.key === "Enter") {
+        props.onFormSubmit();
+      }
+    },
+    [props.onFormSubmit]
+  );
 
   useEffect(() => {
     reset();
@@ -56,7 +64,7 @@ const LoginRedux: React.FC<ILoginRedux> = (props) => {
         onChange={onEmailChange}
         error={Boolean(emailError)}
         helperText={emailError}
-        onKeyDown={props.onEnterClick}
+        onKeyDown={onEnterClick}
       />
       <TextField
         id="outlined-basic"
@@ -78,13 +86,13 @@ const LoginRedux: React.FC<ILoginRedux> = (props) => {
         onChange={onPasswordChange}
         error={Boolean(passError)}
         helperText={passError}
-        onKeyDown={props.onEnterClick}
+        onKeyDown={onEnterClick}
       />
       <Button
         variant="contained"
         sx={{ fontSize: "1.15rem" }}
         style={{ margin: "10px" }}
-        onClick={props.onButtonClick}
+        onClick={props.onFormSubmit}
       >
         Enter
       </Button>

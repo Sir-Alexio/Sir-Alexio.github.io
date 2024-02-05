@@ -2,6 +2,7 @@ import React from "react";
 import LoginRedux from "../views/LoginRedux/index";
 import { useLoginFormState } from "../Services/ValidationService";
 import { useNavigate } from "react-router-dom";
+import { useCallback } from "react";
 
 //функциональный компонент для стандартного логина
 const LoginReduxContainer: React.FC = () => {
@@ -10,23 +11,14 @@ const LoginReduxContainer: React.FC = () => {
 
   const navigate = useNavigate();
 
-  const onButtonClick = () => {
+  const onFormSubmit = useCallback(() => {
     //Проверям, введены ли корректные данные
     if (!passError && !emailError && inputLogin && inputPassword) {
       navigate("/login-redux/success");
     }
-  };
+  }, [passError, emailError]);
 
-  //Проверка нажатия на клавишу Enter
-  const onEnterClick = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter") {
-      onButtonClick();
-    }
-  };
-
-  return (
-    <LoginRedux onEnterClick={onEnterClick} onButtonClick={onButtonClick} />
-  );
+  return <LoginRedux onFormSubmit={onFormSubmit} />;
 };
 
 export default LoginReduxContainer;
