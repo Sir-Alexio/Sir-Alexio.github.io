@@ -14,6 +14,7 @@ import RandomActivity from "./views/RandomActivity/index";
 
 function App() {
   const location = useLocation();
+  const appBarColor = "#0f1116";
 
   return (
     <>
