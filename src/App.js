@@ -1,31 +1,32 @@
-import './styles.css'
-import {Routes, Route, Link,useLocation } from 'react-router-dom';
-import { AppBar, Tab, Tabs} from '@mui/material';
-import Counters from './containers/CounterContainer';
-import About from './views/About/index';
-import Homepage from './views/Home/index';
-import NotFound from './views/NotFound/index';
-import LoginContainer from './containers/LoginContainer';
-import LoginReduxContainer from './containers/ReduxLoginContainer';
-import ReduxSuccess from './views/Redux-Success/index';
-import LoginFormik from './views/LoginFormik/index';
-import FormikSuccess from './views/FormikSuccess/index';
-import RandomActivity from './views/RandomActivity/index';
+import "./styles.css";
+import { Routes, Route, Link, useLocation } from "react-router-dom";
+import { AppBar, Tab, Tabs } from "@mui/material";
+import Counters from "./containers/CounterContainer";
+import About from "./views/About/index";
+import Homepage from "./views/Home/index";
+import NotFound from "./views/NotFound/index";
+import LoginContainer from "./containers/LoginContainer";
+import LoginReduxContainer from "./containers/ReduxLoginContainer";
+import ReduxSuccess from "./views/Redux-Success/index";
+import LoginFormik from "./views/LoginFormik/index";
+import FormikSuccess from "./views/FormikSuccess/index";
+import RandomActivity from "./views/RandomActivity/index";
 
 function App() {
   const location = useLocation();
 
   return (
     <>
-      <AppBar position="static" style={{ backgroundColor: '#0f1116' }}>
-        <Tabs style={{ backgroundColor: '#0f1116' }}>
+      <AppBar position="static" style={{ backgroundColor: appBarColor }}>
+        <Tabs>
           <Tab
             label="About"
             component={Link}
             to="/about"
             style={{
-              color: 'white',
-              backgroundColor: location.pathname === '/about' ? '#1a1d23' : 'transparent',
+              color: "white",
+              backgroundColor:
+                location.pathname === "/about" ? "#1a1d23" : "transparent",
             }}
           />
           <Tab
@@ -33,8 +34,9 @@ function App() {
             component={Link}
             to="/counters"
             style={{
-              color: 'white',
-              backgroundColor: location.pathname === '/counters' ? '#1a1d23' : 'transparent',
+              color: "white",
+              backgroundColor:
+                location.pathname === "/counters" ? "#1a1d23" : "transparent",
             }}
           />
           <Tab
@@ -42,8 +44,9 @@ function App() {
             component={Link}
             to="/login"
             style={{
-              color: 'white',
-              backgroundColor: location.pathname === '/login' ? '#1a1d23' : 'transparent',
+              color: "white",
+              backgroundColor:
+                location.pathname === "/login" ? "#1a1d23" : "transparent",
             }}
           />
           <Tab
@@ -51,8 +54,11 @@ function App() {
             component={Link}
             to="/login-redux"
             style={{
-              color: 'white',
-              backgroundColor: location.pathname === '/login-redux' ? '#1a1d23' : 'transparent',
+              color: "white",
+              backgroundColor:
+                location.pathname === "/login-redux"
+                  ? "#1a1d23"
+                  : "transparent",
             }}
           />
           <Tab
@@ -60,8 +66,11 @@ function App() {
             component={Link}
             to="/login-formik"
             style={{
-              color: 'white',
-              backgroundColor: location.pathname === '/login-formik' ? '#1a1d23' : 'transparent',
+              color: "white",
+              backgroundColor:
+                location.pathname === "/login-formik"
+                  ? "#1a1d23"
+                  : "transparent",
             }}
           />
           <Tab
@@ -69,8 +78,11 @@ function App() {
             component={Link}
             to="/get-activity-saga"
             style={{
-              color: 'white',
-              backgroundColor: location.pathname === '/get-activity-saga' ? '#1a1d23' : 'transparent',
+              color: "white",
+              backgroundColor:
+                location.pathname === "/get-activity-saga"
+                  ? "#1a1d23"
+                  : "transparent",
             }}
           />
         </Tabs>
@@ -92,4 +104,4 @@ function App() {
   );
 }
 
-export default App; 
+export default App;
