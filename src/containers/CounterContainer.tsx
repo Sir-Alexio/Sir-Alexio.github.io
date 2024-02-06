@@ -1,28 +1,25 @@
-import React, { useState } from 'react';
-import ParentCounter from '../views/ParentCounter/index';
+import React, { useCallback, useState } from "react";
+import ParentCounter from "../views/ParentCounter/index";
 
-const CounterContainer: React.FC = () => {
+interface ICounterComponent {
+  key: number;
+  changedValue: number;
+}
 
-  //Определяем хук для счетчиков
+const CounterContainer: React.FC<ICounterComponent> = () => {
   const [counters, setCounters] = useState([0]);
 
-  //Добавление нового счетчика
-  const addNewCounter = () => {
-    //добавляем через хук
-    setCounters((prevCounters)=>{
-
-      //Увеличиваем четные счетчики на единицу
+  const addNewCounter = useCallback(() => {
+    setCounters((prevCounters) => {
       const updatedCounters = prevCounters.map((item) => {
-        return item % 2 === 0 && item !== 0 ? item + 1 : item;
+        return item % 2 === 0 ? item + 1 : item;
       });
-  
-      return [...updatedCounters, 0];
-    })
-  };
 
-  //Удаляем первый счетчик
-  const removeFirstCounter = () => {
-    //Всегла должен оставаться один счетчик
+      return [...updatedCounters, 0];
+    });
+  }, [counters]);
+
+  const removeFirstCounter = useCallback(() => {
     if (counters.length > 1) {
       setCounters(() => {
         let updatedCounters = [...counters];
@@ -30,67 +27,68 @@ const CounterContainer: React.FC = () => {
         //Удаляем первый счетчик
         updatedCounters.shift();
 
-        //Умельшаем все нечетные счетчики на единицу
-        updatedCounters = updatedCounters.map((item)=>{
+        updatedCounters = updatedCounters.map((item) => {
           return item % 2 !== 0 && item !== 0 ? item - 1 : item;
         });
 
         return updatedCounters;
       });
     }
-  };
+  }, [counters]);
 
-  //Восстанавливаем первоначальное состояение
-  const resetCounters = () => {
+  const resetCounters = useCallback(() => {
     setCounters([0]);
-  };
+  }, [counters]);
 
-  //Увеличиваем текущий счетчик на единицу
-  const onIncrementClick = (index:number, value:number) => {
-    setCounters((prevCounters)=>{
-      prevCounters = [...counters];
-      prevCounters[index] = value + 1;
-      return prevCounters;
-    })
-  };
+  const onIncrementClick = useCallback(
+    (index: number, value: number) => {
+      setCounters((prevCounters) => {
+        const updatedCounters = [...prevCounters];
+        updatedCounters[index] = value + 1;
+        return updatedCounters;
+      });
+    },
+    [counters]
+  );
 
-  //Уменьшаем текущий счетчик на единицу
-  const onDecrementClick = (index:number, value:number) => {
-    setCounters((prevCounters)=>{
+  const onDecrementClick = useCallback(
+    (index: number, value: number) => {
+      setCounters((prevCounters) => {
+        if (counters.length >= 1) {
+          prevCounters = [...counters];
+          prevCounters[index] = value - 1;
+          return prevCounters;
+        }
+        return counters;
+      });
+    },
+    [counters]
+  );
 
-      if(counters.length>=1){
-
-        prevCounters = [...counters];
-        prevCounters[index] = value - 1;
-        return prevCounters;
-
-      }
-      return counters;
-    })
-  };
-
-  //Обнуляем текущий счетчик
-  const onResetClick = (index:number, value:number) => {
-    setCounters((prevCounters)=>{
-      prevCounters = [...counters];
-      prevCounters[index] = 0;
-      return prevCounters;
-    })
-  };
+  const onResetClick = useCallback(
+    (index: number) => {
+      setCounters((prevCounters) => {
+        const updatedCounters = [...prevCounters];
+        updatedCounters[index] = 0;
+        return updatedCounters;
+      });
+    },
+    [counters]
+  );
 
   return (
     <div>
-            <ParentCounter 
-            myCounters={counters}
-            addNewCounter = {addNewCounter}
-            removeFirstCounter = {removeFirstCounter}
-            resetCounters = {resetCounters}
-
-            onIncrementCount={onIncrementClick}
-            onDecrementCount={onDecrementClick}
-            onResetCount={onResetClick}/>
-        </div>
-  )
+      <ParentCounter
+        myCounters={counters}
+        addNewCounter={addNewCounter}
+        removeFirstCounter={removeFirstCounter}
+        resetCounters={resetCounters}
+        onIncrementCount={onIncrementClick}
+        onDecrementCount={onDecrementClick}
+        onResetCount={onResetClick}
+      />
+    </div>
+  );
 };
 
 export default CounterContainer;

@@ -1,25 +1,19 @@
-.login-container {
+.container {
   display: flex;
   flex-direction: column;
   align-items: center;
   color: white;
   padding: 20px;
-  margin: 100px;
+  margin: 58px;
 }
 
-.notification-container {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 9999;
+.title {
+  color: white;
+  margin-bottom: 10px;
+  text-shadow: 0px 0px 1px white;
 }
 
-.login-input,
-.password-input {
-  margin: 10px;
-}
-
-.submit-button {
+.inputField {
   margin: 10px;
 }
 
@@ -30,8 +24,7 @@
   margin: 70px;
 }
 
-.email-info,
-.password-info {
+.info {
   color: white;
   font-size: 16px;
   margin: 10px;

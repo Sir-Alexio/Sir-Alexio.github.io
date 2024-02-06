@@ -1,0 +1,40 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  padding: 28.8px;
+  margin: 144px;
+}
+
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+}
+
+.userDetails {
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  width: 110%;
+  height: auto;
+  max-width: 500px;
+  max-height: 500px;
+  margin-right: 52px;
+}
+.textFields {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.readOnlyInput {
+  color: white;
+  border-bottom: 1px solid white;
+  margin-bottom: 25.92px;
+  width: 259.2px;
+}

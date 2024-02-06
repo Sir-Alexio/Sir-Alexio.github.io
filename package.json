@@ -28,7 +28,8 @@
     "redux": "^5.0.1",
     "redux-saga": "^1.3.0",
     "typescript": "^3.2.1 || ^4",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "yup": "^1.3.3"
   },
   "scripts": {
     "homepage": "https://sir-alexio.github.io/Task8-MST-Development",
@@ -58,6 +59,10 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^6.1.1"
+    "gh-pages": "^6.1.1",
+    "tsconfig-paths": "^4.2.0",
+    "tsconfig-paths-webpack-plugin": "^4.1.0",
+    "webpack": "^5.90.1",
+    "webpack-cli": "^5.1.4"
   }
 }
