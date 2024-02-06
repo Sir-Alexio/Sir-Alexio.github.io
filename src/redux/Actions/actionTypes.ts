@@ -1,4 +1,4 @@
-import { Action, ActionWithPayload } from "./entity/entity";
+import { Action, ActionWithPayload } from "./types/types";
 
 export type EmailValidationAction = Action;
 export type EmailValidationSuccess = Action;

@@ -1,7 +1,7 @@
 import React from "react";
 import { Formik } from "formik";
 import { useNavigate } from "react-router-dom";
-import { useLoginFormState } from "../../Services/ValidationService";
+import { useLoginFormState } from "../../services/ValidationService";
 import Typography from "@mui/material/Typography";
 import * as Yup from "yup";
 import "./styles.css";

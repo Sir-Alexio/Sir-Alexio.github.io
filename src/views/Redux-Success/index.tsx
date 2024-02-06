@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import TextField from "@mui/material/TextField";
 import Avatar from "@mui/material/Avatar";
@@ -27,13 +27,13 @@ const ReduxSuccess: React.FC = () => {
   );
   const dispatch = useDispatch();
 
-  const successNotification = () => {
+  const successNotification = useCallback(() => {
     dispatch(createNotification("Account has been successfuly created"));
 
     setTimeout(() => {
       dispatch(resetNotification());
     }, 3000);
-  };
+  }, [createNotification]);
 
   useEffect(() => {
     if (login && password) {

@@ -1,6 +1,7 @@
 import { takeLatest, call, put } from "redux-saga/effects";
 import axios from "axios";
 import { types } from "../Actions/types";
+import { activityUrl } from "constants/constants";
 
 interface IDataActivity {
   data: {
@@ -9,9 +10,8 @@ interface IDataActivity {
 }
 
 function* fetchDataSaga() {
-  const url = "https://www.boredapi.com/api/activity/";
   try {
-    const response: IDataActivity = yield call(axios.get, url);
+    const response: IDataActivity = yield call(axios.get, activityUrl);
 
     yield put({
       type: types.ACTIVITY.SUCCESS,

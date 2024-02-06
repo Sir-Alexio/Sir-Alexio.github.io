@@ -1,5 +1,5 @@
 import { types } from "../Actions/types";
-import { ActionWithPayload } from "../Actions/entity/entity";
+import { ActionWithPayload } from "../Actions/types/types";
 
 interface IEmailValidationState {
   emailError: string;

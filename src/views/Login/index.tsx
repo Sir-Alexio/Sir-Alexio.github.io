@@ -1,4 +1,9 @@
-import React, { useState, ChangeEvent, KeyboardEvent } from "react";
+import React, {
+  useState,
+  ChangeEvent,
+  KeyboardEvent,
+  useCallback,
+} from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Alert from "@mui/material/Alert";
@@ -20,11 +25,14 @@ const Login: React.FC<LoginProps> = (props) => {
   const [isEnterInputEnable, setIsEnterInputEnable] = useState(true);
 
   //Проверка нажатия на клавишу Enter
-  const onEnterPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter" && isEnterInputEnable) {
-      props.onFormSubmit();
-    }
-  };
+  const onEnterPress = useCallback(
+    (event: React.KeyboardEvent<HTMLInputElement>) => {
+      if (event.key === "Enter" && isEnterInputEnable) {
+        props.onFormSubmit();
+      }
+    },
+    [props.onFormSubmit]
+  );
 
   const changeEnterSubmit = () => {
     setIsEnterInputEnable((prev) => !prev);

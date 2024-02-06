@@ -1,7 +1,7 @@
 import React from "react";
 import { useCallback } from "react";
 import Button from "@mui/material/Button";
-import "../Counter/styles.css";
+import "./styles.css";
 
 interface CounterProps {
   index: number;
