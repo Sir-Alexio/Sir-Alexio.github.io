@@ -13,6 +13,8 @@ import {
 } from "../redux/Actions/actions";
 //} from "@redux/Actions";
 
+import { isEmailValid, isPasswordValid } from "Validation/validation";
+
 interface IEmailValidationState {
   emailError: string;
   passError: string;
@@ -39,14 +41,12 @@ export const useLoginFormState = () => {
 
   const onEmailChange = useCallback(
     (email: string) => {
-      let regex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
-
       dispatch(loginField(email));
 
-      if (!email.match(regex) && email.length >= 1) {
-        dispatch(validateEmail());
-      } else {
+      if (isEmailValid(email)) {
         dispatch(successEmail());
+      } else {
+        dispatch(validateEmail());
       }
     },
     [loginField]
@@ -56,10 +56,10 @@ export const useLoginFormState = () => {
     (password: string) => {
       dispatch(passwordField(password));
 
-      if (password.length <= 6 && password.length >= 1) {
-        dispatch(validatePassword());
-      } else {
+      if (isPasswordValid(password)) {
         dispatch(successPassword());
+      } else {
+        dispatch(validatePassword());
       }
     },
     [passwordField]
