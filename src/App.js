@@ -1,6 +1,7 @@
 import "./styles.css";
 import { Routes, Route, Link, useLocation } from "react-router-dom";
 import { AppBar, Tab, Tabs } from "@mui/material";
+import { useMemo } from "react";
 
 import Counters from "./containers/CounterContainer";
 import About from "./views/About/index";
@@ -11,6 +12,8 @@ const appBarColor = "#0f1116";
 
 function App() {
   const location = useLocation();
+
+  const memoLocation = useMemo(() => location, [location]);
 
   return (
     <>
@@ -23,7 +26,7 @@ function App() {
             style={{
               color: "white",
               backgroundColor:
-                location.pathname === "/about" ? "#1a1d23" : "transparent",
+                memoLocation.pathname === "/about" ? "#1a1d23" : "transparent",
             }}
           />
           <Tab
@@ -33,7 +36,9 @@ function App() {
             style={{
               color: "white",
               backgroundColor:
-                location.pathname === "/counters" ? "#1a1d23" : "transparent",
+                memoLocation.pathname === "/counters"
+                  ? "#1a1d23"
+                  : "transparent",
             }}
           />
         </Tabs>

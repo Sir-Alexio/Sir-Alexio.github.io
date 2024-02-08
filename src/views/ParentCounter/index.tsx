@@ -16,13 +16,23 @@ interface ParentCounterProps {
 }
 
 const ParentCounter: React.FC<ParentCounterProps> = (props) => {
+  const {
+    myCounters,
+    addNewCounter,
+    removeFirstCounter,
+    resetCounters,
+    onIncrementCount,
+    onDecrementCount,
+    onResetCount,
+  } = props;
+
   return (
     <div>
       <div className="counter-container">
         <div className="counter-block-parent">
           <Button
             style={Styles.buttonStyle}
-            onClick={props.addNewCounter}
+            onClick={addNewCounter}
             variant="contained"
             color="primary"
           >
@@ -30,7 +40,7 @@ const ParentCounter: React.FC<ParentCounterProps> = (props) => {
           </Button>
           <Button
             style={Styles.buttonStyle}
-            onClick={props.removeFirstCounter}
+            onClick={removeFirstCounter}
             variant="contained"
             color="primary"
           >
@@ -38,7 +48,7 @@ const ParentCounter: React.FC<ParentCounterProps> = (props) => {
           </Button>
           <Button
             style={Styles.buttonStyle}
-            onClick={props.resetCounters}
+            onClick={resetCounters}
             variant="contained"
             color="primary"
           >
@@ -47,14 +57,14 @@ const ParentCounter: React.FC<ParentCounterProps> = (props) => {
         </div>
       </div>
       <div>
-        {props.myCounters.map((counter, index) => (
+        {myCounters.map((counter, index) => (
           <Counter
             key={index}
             index={index}
             currentCounter={counter}
-            onIncrement={props.onIncrementCount}
-            onDecrement={props.onDecrementCount}
-            onReset={props.onResetCount}
+            onIncrement={onIncrementCount}
+            onDecrement={onDecrementCount}
+            onReset={onResetCount}
           />
         ))}
       </div>

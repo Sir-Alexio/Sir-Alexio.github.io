@@ -17,7 +17,7 @@ const CounterContainer: React.FC<ICounterComponent> = () => {
 
       return [...updatedCounters, 0];
     });
-  }, [counters]);
+  }, []);
 
   const removeFirstCounter = useCallback(() => {
     if (counters.length > 1) {
@@ -37,43 +37,34 @@ const CounterContainer: React.FC<ICounterComponent> = () => {
 
   const resetCounters = useCallback(() => {
     setCounters([0]);
-  }, [counters]);
+  }, []);
 
-  const onIncrementClick = useCallback(
-    (index: number, value: number) => {
-      setCounters((prevCounters) => {
-        const updatedCounters = [...prevCounters];
-        updatedCounters[index] = value + 1;
-        return updatedCounters;
-      });
-    },
-    [counters]
-  );
+  const onIncrementClick = useCallback((index: number, value: number) => {
+    setCounters((prevCounters) => {
+      const updatedCounters = [...prevCounters];
+      updatedCounters[index] = value + 1;
+      return updatedCounters;
+    });
+  }, []);
 
-  const onDecrementClick = useCallback(
-    (index: number, value: number) => {
-      setCounters((prevCounters) => {
-        if (counters.length >= 1) {
-          prevCounters = [...counters];
-          prevCounters[index] = value - 1;
-          return prevCounters;
-        }
-        return counters;
-      });
-    },
-    [counters]
-  );
+  const onDecrementClick = useCallback((index: number, value: number) => {
+    setCounters((prevCounters) => {
+      if (counters.length >= 1) {
+        prevCounters = [...counters];
+        prevCounters[index] = value - 1;
+        return prevCounters;
+      }
+      return counters;
+    });
+  }, []);
 
-  const onResetClick = useCallback(
-    (index: number) => {
-      setCounters((prevCounters) => {
-        const updatedCounters = [...prevCounters];
-        updatedCounters[index] = 0;
-        return updatedCounters;
-      });
-    },
-    [counters]
-  );
+  const onResetClick = useCallback((index: number) => {
+    setCounters((prevCounters) => {
+      const updatedCounters = [...prevCounters];
+      updatedCounters[index] = 0;
+      return updatedCounters;
+    });
+  }, []);
 
   return (
     <div>
