@@ -11,9 +11,13 @@ interface CounterProps {
   onReset: (index: number, value: number) => void;
 }
 
-const Counter: React.FC<CounterProps> = (props) => {
-  const { index, currentCounter, onIncrement, onDecrement, onReset } = props;
-
+const Counter: React.FC<CounterProps> = ({
+  index,
+  currentCounter,
+  onIncrement,
+  onDecrement,
+  onReset,
+}) => {
   const handleIncrement = useCallback(() => {
     onIncrement(index, currentCounter);
   }, [onIncrement, index, currentCounter]);

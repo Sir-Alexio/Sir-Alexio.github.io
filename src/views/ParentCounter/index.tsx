@@ -15,17 +15,15 @@ interface ParentCounterProps {
   onResetCount: (index: number, value: number) => void;
 }
 
-const ParentCounter: React.FC<ParentCounterProps> = (props) => {
-  const {
-    myCounters,
-    addNewCounter,
-    removeFirstCounter,
-    resetCounters,
-    onIncrementCount,
-    onDecrementCount,
-    onResetCount,
-  } = props;
-
+const ParentCounter: React.FC<ParentCounterProps> = ({
+  myCounters,
+  addNewCounter,
+  removeFirstCounter,
+  resetCounters,
+  onIncrementCount,
+  onDecrementCount,
+  onResetCount,
+}) => {
   return (
     <div>
       <div className="counter-container">

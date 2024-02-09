@@ -8,12 +8,29 @@ import About from "./views/About/index";
 import Homepage from "./views/Home/index";
 import NotFound from "./views/NotFound/index";
 
-const appBarColor = "#0f1116";
-
 function App() {
+  const appBarColor = "#0f1116";
+  const tabColor = "#1a1d23";
+
   const location = useLocation();
 
-  const memoLocation = useMemo(() => location, [location]);
+  const pathname = useMemo(() => location.pathname, [location]);
+
+  const aboutTabStyle = useMemo(
+    () => ({
+      color: "white",
+      backgroundColor: pathname === "/about" ? tabColor : "transparent",
+    }),
+    [pathname]
+  );
+
+  const countersTabStyle = useMemo(
+    () => ({
+      color: "white",
+      backgroundColor: pathname === "/counters" ? tabColor : "transparent",
+    }),
+    [pathname]
+  );
 
   return (
     <>
@@ -23,23 +40,13 @@ function App() {
             label="About"
             component={Link}
             to="/about"
-            style={{
-              color: "white",
-              backgroundColor:
-                memoLocation.pathname === "/about" ? "#1a1d23" : "transparent",
-            }}
+            style={aboutTabStyle}
           />
           <Tab
             label="Counters"
             component={Link}
             to="/counters"
-            style={{
-              color: "white",
-              backgroundColor:
-                memoLocation.pathname === "/counters"
-                  ? "#1a1d23"
-                  : "transparent",
-            }}
+            style={countersTabStyle}
           />
         </Tabs>
       </AppBar>
