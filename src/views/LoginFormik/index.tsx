@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useLoginFormState } from "../../services/ValidationService";
 import Typography from "@mui/material/Typography";
 import { validationSchema } from "./validation";
-import { initialState } from "types/constants";
+import { initialState } from "../../constants";
 import "./styles.css";
 
 interface IFormValues {
