@@ -20,21 +20,19 @@ const CounterContainer: React.FC<ICounterComponent> = () => {
   }, []);
 
   const removeFirstCounter = useCallback(() => {
-    if (counters.length > 1) {
-      setCounters(() => {
-        let updatedCounters = [...counters];
-
+    setCounters(() => {
+      let updatedCounters = [...counters];
+      if (counters.length > 1) {
         //Удаляем первый счетчик
         updatedCounters.shift();
 
         updatedCounters = updatedCounters.map((item) => {
           return item % 2 !== 0 && item !== 0 ? item - 1 : item;
         });
-
-        return updatedCounters;
-      });
-    }
-  }, [counters]);
+      }
+      return updatedCounters;
+    });
+  }, []);
 
   const resetCounters = useCallback(() => {
     setCounters([0]);
