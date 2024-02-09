@@ -1,56 +1,80 @@
-import './styles.css'
-import {Routes, Route, Link,useLocation } from 'react-router-dom';
-import { AppBar, Tab, Tabs} from '@mui/material';
-import Counters from './containers/CounterContainer';
-import About from './views/About/index';
-import Homepage from './views/Home/index';
-import NotFound from './views/NotFound/index';
-import LoginContainer from './containers/LoginContainer';
-import LoginReduxContainer from './containers/ReduxLoginContainer';
-import ReduxSuccess from './views/Redux-Success/index';
+import "./styles.css";
+import { Routes, Route, Link, useLocation } from "react-router-dom";
+import { AppBar, Tab, Tabs } from "@mui/material";
+import Counters from "./containers/CounterContainer";
+import About from "./views/About/index";
+import Homepage from "./views/Home/index";
+import NotFound from "./views/NotFound/index";
+import LoginContainer from "./containers/LoginContainer";
+import LoginReduxContainer from "./containers/ReduxLoginContainer";
+import ReduxSuccess from "./views/Redux-Success/index";
+import { useMemo } from "react";
 
 function App() {
+  const appBarColor = "#0f1116";
+  const tabColor = "#1a1d23";
+
   const location = useLocation();
 
+  const pathname = useMemo(() => location.pathname, [location]);
+
+  const aboutTabStyle = useMemo(
+    () => ({
+      color: "white",
+      backgroundColor: pathname === "/about" ? tabColor : "transparent",
+    }),
+    [pathname]
+  );
+
+  const countersTabStyle = useMemo(
+    () => ({
+      color: "white",
+      backgroundColor: pathname === "/counters" ? tabColor : "transparent",
+    }),
+    [pathname]
+  );
+
+  const loginTabStyle = useMemo(
+    () => ({
+      color: "white",
+      backgroundColor: pathname === "/login" ? tabColor : "transparent",
+    }),
+    [pathname]
+  );
+  const reduxTabStyle = useMemo(
+    () => ({
+      color: "white",
+      backgroundColor: pathname === "/login-redux" ? tabColor : "transparent",
+    }),
+    [pathname]
+  );
   return (
     <>
-      <AppBar position="static" style={{ backgroundColor: '#0f1116' }}>
-        <Tabs style={{ backgroundColor: '#0f1116' }}>
+      <AppBar position="static" style={{ backgroundColor: appBarColor }}>
+        <Tabs>
           <Tab
             label="About"
             component={Link}
             to="/about"
-            style={{
-              color: 'white',
-              backgroundColor: location.pathname === '/about' ? '#1a1d23' : 'transparent',
-            }}
+            style={aboutTabStyle}
           />
           <Tab
             label="Counters"
             component={Link}
             to="/counters"
-            style={{
-              color: 'white',
-              backgroundColor: location.pathname === '/counters' ? '#1a1d23' : 'transparent',
-            }}
+            style={countersTabStyle}
           />
           <Tab
             label="Login"
             component={Link}
             to="/login"
-            style={{
-              color: 'white',
-              backgroundColor: location.pathname === '/login' ? '#1a1d23' : 'transparent',
-            }}
+            style={loginTabStyle}
           />
           <Tab
             label="Login Redux"
             component={Link}
             to="/login-redux"
-            style={{
-              color: 'white',
-              backgroundColor: location.pathname === '/login-redux' ? '#1a1d23' : 'transparent',
-            }}
+            style={reduxTabStyle}
           />
         </Tabs>
       </AppBar>
@@ -68,4 +92,4 @@ function App() {
   );
 }
 
-export default App; 
+export default App;

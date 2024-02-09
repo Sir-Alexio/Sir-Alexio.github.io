@@ -1,46 +1,93 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import Login from "../views/Login/index";
-import { useLoginFormState } from "../Services/ValidationService";
+import { ILoginData } from "../types/types";
 
 //функциональный компонент для стандартного логина
 const LoginContainer: React.FC = () => {
-  const { emailError, passError, inputLogin, inputPassword, reset } =
-    useLoginFormState();
+  //хуки для отслеживания состояний
+  //Отслеживает ошибку для пароля
+  const [passError, setPassError] = useState("");
+
+  //Отслеживает ошибку для почты
+  const [emailError, setEmailError] = useState("");
+
+  //Хранит информацию о текущем пароле и почте
+  const [data, setData] = useState<ILoginData>({ email: "", password: "" });
+
   //Отслеживает уведомление
   const [notification, setNotification] = useState("");
 
+  //функция для изменения поля почты
+  const onEmailChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      //Определим регулярное выражение
+      let regex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
+
+      //Получаем почту
+      let email = event.target.value;
+
+      //Используем хук для изменения почты
+      setData((prevData) => {
+        return { ...prevData, email: email };
+      });
+
+      //Используем хук для проверки почты по регулярному выражению
+      if (!email.match(regex)) {
+        setEmailError("Wrong email format.");
+      } else {
+        setEmailError("");
+      }
+    },
+    [data]
+  );
+
+  //Функция для изменения поля пароля
+  const onPasswordFieldChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      let password = event.target.value;
+      setData((prevData) => {
+        return { ...prevData, password: password };
+      });
+
+      //Валидация 6 символов
+      if (password.length <= 6) {
+        setPassError("Less, then 6 characters.");
+      } else {
+        setPassError("");
+      }
+    },
+    [data]
+  );
+
   //Обработчик нажатия на кнопку Enter
-  const onButtonClick = () => {
-    //Проверям, введены ли корректные данные
-    if (!passError && !emailError && inputLogin && inputPassword) {
+  const onFormSubmit = useCallback(() => {
+    if (!passError && !emailError && data.email && data.password) {
       //выводим их в консоль
-      console.log("Email: ", inputLogin);
-      console.log("Password: ", inputPassword);
+      console.log("Email: ", data.email);
+      console.log("Password: ", data.password);
 
       //Сбрасываем значения
-      reset();
+      setData({ email: "", password: "" });
 
       //Выводим уведомление, что удачно вошли
-      setNotification("Your account has been succesfuly created!");
+      setNotification("Your account has been successfuly created!");
 
       //Удаляем уведомление через 3 секунды
       setTimeout(() => {
         setNotification("");
       }, 3000);
     }
-  };
+  }, [data, setData]);
 
-  //Проверка нажатия на клавишу Enter
-  const onEnterPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter") {
-      onButtonClick();
-    }
-  };
   return (
     <Login
       notification={notification}
-      onEnterPress={onEnterPress}
-      onButtonClick={onButtonClick}
+      emailError={emailError}
+      passError={passError}
+      data={data}
+      onEmailChange={onEmailChange}
+      onPasswordFieldChange={onPasswordFieldChange}
+      onFormSubmit={onFormSubmit}
     />
   );
 };

@@ -9,7 +9,7 @@ interface LoginReduxProps {
   onFormSubmit: () => void;
 }
 
-const LoginRedux: React.FC<LoginReduxProps> = (props) => {
+const LoginRedux: React.FC<LoginReduxProps> = ({ onFormSubmit }) => {
   const {
     emailError,
     passError,
@@ -23,10 +23,10 @@ const LoginRedux: React.FC<LoginReduxProps> = (props) => {
   const onEnterClick = useCallback(
     (event: React.KeyboardEvent<HTMLInputElement>) => {
       if (event.key === "Enter") {
-        props.onFormSubmit();
+        onFormSubmit();
       }
     },
-    [props.onFormSubmit]
+    [onFormSubmit]
   );
 
   useEffect(() => {
@@ -92,7 +92,7 @@ const LoginRedux: React.FC<LoginReduxProps> = (props) => {
         variant="contained"
         sx={{ fontSize: "1.15rem" }}
         style={{ margin: "10px" }}
-        onClick={props.onFormSubmit}
+        onClick={onFormSubmit}
       >
         Enter
       </Button>
