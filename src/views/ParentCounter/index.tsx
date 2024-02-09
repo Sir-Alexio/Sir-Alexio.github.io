@@ -3,7 +3,7 @@ import Button from "@mui/material/Button";
 import Counter from "../Counter/index";
 import Styles from "./style";
 
-interface CounterProps {
+interface ParentCounterProps {
   myCounters: number[];
 
   addNewCounter: () => void;
@@ -15,14 +15,22 @@ interface CounterProps {
   onResetCount: (index: number, value: number) => void;
 }
 
-const ParentCounter: React.FC<CounterProps> = (props) => {
+const ParentCounter: React.FC<ParentCounterProps> = ({
+  myCounters,
+  addNewCounter,
+  removeFirstCounter,
+  resetCounters,
+  onIncrementCount,
+  onDecrementCount,
+  onResetCount,
+}) => {
   return (
     <div>
       <div className="counter-container">
         <div className="counter-block-parent">
           <Button
             style={Styles.buttonStyle}
-            onClick={props.addNewCounter}
+            onClick={addNewCounter}
             variant="contained"
             color="primary"
           >
@@ -30,7 +38,7 @@ const ParentCounter: React.FC<CounterProps> = (props) => {
           </Button>
           <Button
             style={Styles.buttonStyle}
-            onClick={props.removeFirstCounter}
+            onClick={removeFirstCounter}
             variant="contained"
             color="primary"
           >
@@ -38,7 +46,7 @@ const ParentCounter: React.FC<CounterProps> = (props) => {
           </Button>
           <Button
             style={Styles.buttonStyle}
-            onClick={props.resetCounters}
+            onClick={resetCounters}
             variant="contained"
             color="primary"
           >
@@ -47,14 +55,14 @@ const ParentCounter: React.FC<CounterProps> = (props) => {
         </div>
       </div>
       <div>
-        {props.myCounters.map((counter, index) => (
+        {myCounters.map((counter, index) => (
           <Counter
             key={index}
             index={index}
             currentCounter={counter}
-            onIncrement={props.onIncrementCount}
-            onDecrement={props.onDecrementCount}
-            onReset={props.onResetCount}
+            onIncrement={onIncrementCount}
+            onDecrement={onDecrementCount}
+            onReset={onResetCount}
           />
         ))}
       </div>

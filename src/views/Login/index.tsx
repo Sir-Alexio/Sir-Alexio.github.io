@@ -1,4 +1,9 @@
-import React, { useState, ChangeEvent, KeyboardEvent } from "react";
+import React, {
+  useState,
+  ChangeEvent,
+  KeyboardEvent,
+  useCallback,
+} from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Alert from "@mui/material/Alert";
@@ -15,26 +20,35 @@ interface LoginProps {
   onFormSubmit: () => void;
 }
 
-const Login: React.FC<LoginProps> = (props) => {
+const Login: React.FC<LoginProps> = ({
+  notification,
+  emailError,
+  passError,
+  data,
+  onEmailChange,
+  onPasswordFieldChange,
+  onFormSubmit,
+}) => {
   //Флажок для нажатия на кнопку enter
   const [isEnterInputEnable, setIsEnterInputEnable] = useState(true);
 
   //Проверка нажатия на клавишу Enter
   const onEnterPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter" && isEnterInputEnable) {
-      props.onFormSubmit();
+      onFormSubmit();
     }
   };
 
-  const changeEnterSubmit = () => {
+  const changeEnterSubmit = useCallback(() => {
     setIsEnterInputEnable((prev) => !prev);
-  };
+  }, []);
+
   return (
     <div className="login-container">
-      {props.notification && (
+      {notification && (
         <div className="notification-container">
           <Alert variant="filled" severity="success">
-            {props.notification}
+            {notification}
           </Alert>
         </div>
       )}
@@ -54,10 +68,10 @@ const Login: React.FC<LoginProps> = (props) => {
         }}
         placeholder="Enter your login"
         style={{ margin: "10px" }}
-        onChange={props.onEmailChange}
-        error={Boolean(props.emailError)}
-        helperText={props.emailError}
-        value={props.data.email}
+        onChange={onEmailChange}
+        error={Boolean(emailError)}
+        helperText={emailError}
+        value={data.email}
         onKeyDown={onEnterPress}
       />
       <TextField
@@ -76,26 +90,24 @@ const Login: React.FC<LoginProps> = (props) => {
         }}
         placeholder="Enter your password"
         style={{ margin: "10px" }}
-        onChange={props.onPasswordFieldChange}
-        error={Boolean(props.passError)}
-        helperText={props.passError}
+        onChange={onPasswordFieldChange}
+        error={Boolean(passError)}
+        helperText={passError}
         type="password"
-        value={props.data.password}
+        value={data.password}
         onKeyDown={onEnterPress}
       />
       <Button
         variant="outlined"
         sx={{ fontSize: "1.15rem" }}
         style={{ margin: "10px" }}
-        onClick={props.onFormSubmit}
+        onClick={onFormSubmit}
       >
         Enter
       </Button>
       <div className="counter-block">
-        <div className="email-info">Current email: {props.data.email}</div>
-        <div className="password-info">
-          Current password: {props.data.password}
-        </div>
+        <div className="email-info">Current email: {data.email}</div>
+        <div className="password-info">Current password: {data.password}</div>
       </div>
     </div>
   );

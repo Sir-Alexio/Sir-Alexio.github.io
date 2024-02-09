@@ -1,26 +1,25 @@
-import React, { useState } from "react";
-import ParentCounter from "views/ParentCounter";
+import React, { useCallback, useState } from "react";
+import ParentCounter from "../views/ParentCounter/index";
 
-const CounterContainer: React.FC = () => {
-  //Определяем хук для счетчиков
+interface ICounterComponent {
+  key: number;
+  changedValue: number;
+}
+
+const CounterContainer: React.FC<ICounterComponent> = () => {
   const [counters, setCounters] = useState([0]);
 
-  //Добавление нового счетчика
-  const addNewCounter = () => {
-    //добавляем через хук
+  const addNewCounter = useCallback(() => {
     setCounters((prevCounters) => {
-      //Увеличиваем четные счетчики на единицу
       const updatedCounters = prevCounters.map((item) => {
-        return item % 2 === 0 && item !== 0 ? item + 1 : item;
+        return item % 2 === 0 ? item + 1 : item;
       });
 
       return [...updatedCounters, 0];
     });
-  };
+  }, []);
 
-  //Удаляем первый счетчик
-  const removeFirstCounter = () => {
-    //Всегла должен оставаться один счетчик
+  const removeFirstCounter = useCallback(() => {
     if (counters.length > 1) {
       setCounters(() => {
         let updatedCounters = [...counters];
@@ -28,7 +27,6 @@ const CounterContainer: React.FC = () => {
         //Удаляем первый счетчик
         updatedCounters.shift();
 
-        //Умельшаем все нечетные счетчики на единицу
         updatedCounters = updatedCounters.map((item) => {
           return item % 2 !== 0 && item !== 0 ? item - 1 : item;
         });
@@ -36,24 +34,21 @@ const CounterContainer: React.FC = () => {
         return updatedCounters;
       });
     }
-  };
+  }, [counters]);
 
-  //Восстанавливаем первоначальное состояение
-  const resetCounters = () => {
+  const resetCounters = useCallback(() => {
     setCounters([0]);
-  };
+  }, []);
 
-  //Увеличиваем текущий счетчик на единицу
-  const onIncrementClick = (index: number, value: number) => {
+  const onIncrementClick = useCallback((index: number, value: number) => {
     setCounters((prevCounters) => {
-      prevCounters = [...counters];
-      prevCounters[index] = value + 1;
-      return prevCounters;
+      const updatedCounters = [...prevCounters];
+      updatedCounters[index] = value + 1;
+      return updatedCounters;
     });
-  };
+  }, []);
 
-  //Уменьшаем текущий счетчик на единицу
-  const onDecrementClick = (index: number, value: number) => {
+  const onDecrementClick = useCallback((index: number, value: number) => {
     setCounters((prevCounters) => {
       if (counters.length >= 1) {
         prevCounters = [...counters];
@@ -62,16 +57,15 @@ const CounterContainer: React.FC = () => {
       }
       return counters;
     });
-  };
+  }, []);
 
-  //Обнуляем текущий счетчик
-  const onResetClick = (index: number, value: number) => {
+  const onResetClick = useCallback((index: number) => {
     setCounters((prevCounters) => {
-      prevCounters = [...counters];
-      prevCounters[index] = 0;
-      return prevCounters;
+      const updatedCounters = [...prevCounters];
+      updatedCounters[index] = 0;
+      return updatedCounters;
     });
-  };
+  }, []);
 
   return (
     <div>
