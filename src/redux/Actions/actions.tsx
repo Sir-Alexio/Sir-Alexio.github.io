@@ -1,66 +1,49 @@
-import {
-  EmailValidationSuccess,
-  EmailValidationAction,
-  PasswordValidationAction,
-  PasswordValidationSuccess,
-  ResetErrors,
-  ResetData,
-  LoginField,
-  PassField,
-  SuccessNotification,
-  ResetNotification,
-  FetchData,
-} from "./actionTypes";
+import { Action } from "./types";
+import { LoginField, PassField, SuccessNotification } from "./actionTypes";
 
 import { types } from "./types";
 
-export const fetchData = (): FetchData => ({ type: types.ACTIVITY.DATA });
+export const fetchData = (): Action => ({ type: types.ACTIVITY.DATA });
 
-export const validateEmail = (): EmailValidationAction => ({
+export const setErrorEmailValidation = (): Action => ({
   type: types.AUTH.EMAIL_VALIDATION.ERROR,
 });
 
-export const successEmail = (): EmailValidationSuccess => ({
+export const setSuccessEmailValidation = (): Action => ({
   type: types.AUTH.EMAIL_VALIDATION.SUCCESS,
 });
 
-export const validatePassword = (): PasswordValidationAction => ({
+export const setErrorPasswordValidation = (): Action => ({
   type: types.AUTH.PASSWORD_VALIDATION.ERROR,
 });
 
-export const successPassword = (): PasswordValidationSuccess => ({
+export const setSuccessPasswordValidation = (): Action => ({
   type: types.AUTH.PASSWORD_VALIDATION.SUCCESS,
 });
 
-export const resetErrors = (): ResetErrors => ({
+export const resetErrors = (): Action => ({
   type: types.ERRORS.RESET,
 });
 
-export const resetData = (): ResetData => ({
+export const resetData = (): Action => ({
   type: types.AUTH.DATA.RESET,
 });
 
-export const loginField = (inputText: string): LoginField => ({
+export const setLoginField = (inputText: string): LoginField => ({
   type: types.AUTH.LOGIN,
-  payload: {
-    email: inputText,
-  },
+  payload: inputText,
 });
 
-export const passwordField = (inputText: string): PassField => ({
+export const setPasswordField = (inputText: string): PassField => ({
   type: types.AUTH.PASSWORD,
-  payload: {
-    password: inputText,
-  },
+  payload: inputText,
 });
 
 export const createNotification = (inputText: string): SuccessNotification => ({
   type: types.NOTIFICATION.SUCCESS,
-  payload: {
-    text: inputText,
-  },
+  payload: inputText,
 });
 
-export const resetNotification = (): ResetNotification => ({
+export const resetNotification = (): Action => ({
   type: types.NOTIFICATION.RESET,
 });

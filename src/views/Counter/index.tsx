@@ -11,25 +11,29 @@ interface CounterProps {
   onReset: (index: number, value: number) => void;
 }
 
-const Counter: React.FC<CounterProps> = (props) => {
+const Counter: React.FC<CounterProps> = ({
+  index,
+  currentCounter,
+  onIncrement,
+  onDecrement,
+  onReset,
+}) => {
   const handleIncrement = useCallback(() => {
-    props.onIncrement(props.index, props.currentCounter);
-  }, [props.onIncrement, props.index, props.currentCounter]);
+    onIncrement(index, currentCounter);
+  }, [onIncrement, index, currentCounter]);
 
   const handleDecrement = useCallback(() => {
-    props.onDecrement(props.index, props.currentCounter);
-  }, [props.onDecrement, props.index, props.currentCounter]);
+    onDecrement(index, currentCounter);
+  }, [onDecrement, index, currentCounter]);
 
   const handleReset = useCallback(() => {
-    props.onReset(props.index, props.currentCounter);
-  }, [props.onReset, props.index, props.currentCounter]);
+    onReset(index, currentCounter);
+  }, [onReset, index, currentCounter]);
 
   return (
     <div className="counter-container">
       <div className="counter-block">
-        <div style={{ marginBottom: "10px" }}>
-          Count: {props.currentCounter}
-        </div>
+        <div style={{ marginBottom: "10px" }}>Count: {currentCounter}</div>
         <Button
           className="button-style"
           onClick={handleIncrement}

@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { Formik } from "formik";
 import { useNavigate } from "react-router-dom";
 import { useLoginFormState } from "../../services/ValidationService";
 import Typography from "@mui/material/Typography";
-import * as Yup from "yup";
+import { validationSchema } from "./validation";
+import { initialState } from "types/constants";
 import "./styles.css";
 
 interface IFormValues {
@@ -11,32 +12,21 @@ interface IFormValues {
   password: string;
 }
 
-const Basic: React.FC = () => {
-  const validationSchema = Yup.object().shape({
-    email: Yup.string()
-      .matches(
-        /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-        "Invalid email address"
-      )
-      .required("Email is required"),
-    password: Yup.string()
-      .min(6, "Password must be at least 6 characters")
-      .required("Password is required"),
-  });
-
+const LoginFormik: React.FC = () => {
   const { onEmailChange, onPasswordChange } = useLoginFormState();
   const navigate = useNavigate();
-  const initialState = { email: "", password: "" };
+  const onSubmitButton = useCallback((values: IFormValues) => {
+    onEmailChange(values.email);
+    onPasswordChange(values.password);
+    navigate("/login-formik/success");
+  }, []);
+
   return (
     <div className="form-container">
       <Formik
         initialValues={initialState}
         validationSchema={validationSchema}
-        onSubmit={(values: IFormValues) => {
-          onEmailChange(values.email);
-          onPasswordChange(values.password);
-          navigate("/login-formik/success");
-        }}
+        onSubmit={onSubmitButton}
       >
         {({
           values,
@@ -110,4 +100,4 @@ const Basic: React.FC = () => {
   );
 };
 
-export default Basic;
+export default LoginFormik;

@@ -2,12 +2,12 @@ import React, { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
-  validateEmail,
-  successEmail,
-  validatePassword,
-  successPassword,
-  loginField,
-  passwordField,
+  setErrorEmailValidation,
+  setSuccessEmailValidation,
+  setErrorPasswordValidation,
+  setSuccessPasswordValidation,
+  setLoginField,
+  setPasswordField,
   resetData,
   resetErrors,
 } from "../redux/Actions/actions";
@@ -37,33 +37,27 @@ export const useLoginFormState = () => {
 
   const dispatch = useDispatch();
 
-  const onEmailChange = useCallback(
-    (email: string) => {
-      let regex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
+  const onEmailChange = useCallback((email: string) => {
+    let regex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
 
-      dispatch(loginField(email));
+    dispatch(setLoginField(email));
 
-      if (!email.match(regex) && email.length >= 1) {
-        dispatch(validateEmail());
-      } else {
-        dispatch(successEmail());
-      }
-    },
-    [loginField]
-  );
+    if (!email.match(regex) && email.length >= 1) {
+      dispatch(setErrorEmailValidation());
+    } else {
+      dispatch(setSuccessEmailValidation());
+    }
+  }, []);
 
-  const onPasswordChange = useCallback(
-    (password: string) => {
-      dispatch(passwordField(password));
+  const onPasswordChange = useCallback((password: string) => {
+    dispatch(setPasswordField(password));
 
-      if (password.length <= 6 && password.length >= 1) {
-        dispatch(validatePassword());
-      } else {
-        dispatch(successPassword());
-      }
-    },
-    [passwordField]
-  );
+    if (password.length <= 6 && password.length >= 1) {
+      dispatch(setErrorPasswordValidation());
+    } else {
+      dispatch(setSuccessPasswordValidation());
+    }
+  }, []);
 
   const reset = useCallback(() => {
     dispatch(resetErrors());
