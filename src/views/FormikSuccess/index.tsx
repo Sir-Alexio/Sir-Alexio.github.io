@@ -15,7 +15,7 @@ interface IEmailValidationState {
   notification: string;
 }
 
-const FormicSuccess: React.FC = () => {
+const FormikSuccess: React.FC = () => {
   const login = useSelector((state: IEmailValidationState) => state.loginField);
   const password = useSelector(
     (state: IEmailValidationState) => state.passwordField
@@ -23,7 +23,6 @@ const FormicSuccess: React.FC = () => {
   const notification = useSelector(
     (state: IEmailValidationState) => state.notification
   );
-  const dispatch = useDispatch();
 
   return (
     <div className="container">
@@ -76,4 +75,4 @@ const FormicSuccess: React.FC = () => {
   );
 };
 
-export default FormicSuccess;
+export default FormikSuccess;

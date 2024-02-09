@@ -1,16 +1,9 @@
+import { REGEX } from "../constants";
+
 export const isEmailValid = (email: string) => {
-  let regex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
-
-  if (email.match(regex) && email.length >= 1) {
-    return true;
-  }
-
-  return false;
+  return email.match(REGEX) && email.length >= 1;
 };
 
 export const isPasswordValid = (password: string) => {
-  if (password.length > 6) {
-    return true;
-  }
-  return false;
+  return password.length > 6;
 };

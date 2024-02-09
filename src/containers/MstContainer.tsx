@@ -7,12 +7,12 @@ const MstContainer: React.FC = () => {
   const navigate = useNavigate();
 
   const onFormSubmit = useCallback(() => {
-    if (userStore.validateEmail() && userStore.validatePassword()) {
+    if (userStore.validateEmail && userStore.validatePassword) {
       userStore.submit();
       navigate("/login-mst/success");
     }
   }, []);
 
-  return <MstLogin onButtonClick={onFormSubmit} />;
+  return <MstLogin onFormSubmit={onFormSubmit} />;
 };
 export default MstContainer;

@@ -21,7 +21,7 @@ const RandomActivity: React.FC = () => {
 
   useEffect(() => {
     dispatch(fetchData());
-  }, [dispatch]);
+  }, []);
 
   return (
     <div className="container">

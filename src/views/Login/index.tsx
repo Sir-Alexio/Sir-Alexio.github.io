@@ -15,12 +15,20 @@ interface LoginProps {
   emailError: string;
   passError: string;
   data: ILoginData;
-  onEmailChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  onPasswordFieldChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  onEmailChange: (inputEmail: string) => void;
+  onPasswordFieldChange: (inputPassword: string) => void;
   onFormSubmit: () => void;
 }
 
-const Login: React.FC<LoginProps> = (props) => {
+const Login: React.FC<LoginProps> = ({
+  notification,
+  emailError,
+  passError,
+  data,
+  onEmailChange,
+  onPasswordFieldChange,
+  onFormSubmit,
+}) => {
   //Флажок для нажатия на кнопку enter
   const [isEnterInputEnable, setIsEnterInputEnable] = useState(true);
 
@@ -28,21 +36,36 @@ const Login: React.FC<LoginProps> = (props) => {
   const onEnterPress = useCallback(
     (event: React.KeyboardEvent<HTMLInputElement>) => {
       if (event.key === "Enter" && isEnterInputEnable) {
-        props.onFormSubmit();
+        onFormSubmit();
       }
     },
-    [props.onFormSubmit]
+    [onFormSubmit]
   );
 
-  const changeEnterSubmit = () => {
+  const changeEnterSubmit = useCallback(() => {
     setIsEnterInputEnable((prev) => !prev);
-  };
+  }, []);
+
+  const LoginEmailChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      onEmailChange(event.target.value);
+    },
+    [onEmailChange]
+  );
+
+  const LoginPasswordChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      onPasswordFieldChange(event.target.value);
+    },
+    [onPasswordFieldChange]
+  );
+
   return (
     <div className="login-container">
-      {props.notification && (
+      {notification && (
         <div className="notification-container">
           <Alert variant="filled" severity="success">
-            {props.notification}
+            {notification}
           </Alert>
         </div>
       )}
@@ -62,10 +85,10 @@ const Login: React.FC<LoginProps> = (props) => {
         }}
         placeholder="Enter your login"
         style={{ margin: "10px" }}
-        onChange={props.onEmailChange}
-        error={Boolean(props.emailError)}
-        helperText={props.emailError}
-        value={props.data.email}
+        onChange={LoginEmailChange}
+        error={Boolean(emailError)}
+        helperText={emailError}
+        value={data.email}
         onKeyDown={onEnterPress}
       />
       <TextField
@@ -84,26 +107,24 @@ const Login: React.FC<LoginProps> = (props) => {
         }}
         placeholder="Enter your password"
         style={{ margin: "10px" }}
-        onChange={props.onPasswordFieldChange}
-        error={Boolean(props.passError)}
-        helperText={props.passError}
+        onChange={LoginPasswordChange}
+        error={Boolean(passError)}
+        helperText={passError}
         type="password"
-        value={props.data.password}
+        value={data.password}
         onKeyDown={onEnterPress}
       />
       <Button
         variant="outlined"
         sx={{ fontSize: "1.15rem" }}
         style={{ margin: "10px" }}
-        onClick={props.onFormSubmit}
+        onClick={onFormSubmit}
       >
         Enter
       </Button>
       <div className="counter-block">
-        <div className="email-info">Current email: {props.data.email}</div>
-        <div className="password-info">
-          Current password: {props.data.password}
-        </div>
+        <div className="email-info">Current email: {data.email}</div>
+        <div className="password-info">Current password: {data.password}</div>
       </div>
     </div>
   );

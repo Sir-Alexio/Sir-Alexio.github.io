@@ -1,5 +1,5 @@
 import { types } from "../Actions/types";
-import { ActionWithPayload } from "../Actions/types/types";
+import { ActionWithPayload } from "../Actions/types";
 
 interface IEmailValidationState {
   emailError: string;
@@ -19,13 +19,7 @@ const EmailValidationInitialState: IEmailValidationState = {
 
 const ValidationReducer = (
   state: IEmailValidationState = EmailValidationInitialState,
-  action: ActionWithPayload<{
-    email: string;
-    password: string;
-    text: string;
-    activity: string;
-    error: string;
-  }>
+  action: ActionWithPayload<string>
 ) => {
   switch (action.type) {
     case types.AUTH.EMAIL_VALIDATION.ERROR:
@@ -41,15 +35,13 @@ const ValidationReducer = (
       return state ? { ...state, passError: "" } : state;
 
     case types.AUTH.LOGIN:
-      return state ? { ...state, loginField: action.payload.email } : state;
+      return state ? { ...state, loginField: action.payload } : state;
 
     case types.AUTH.PASSWORD:
-      return state
-        ? { ...state, passwordField: action.payload.password }
-        : state;
+      return state ? { ...state, passwordField: action.payload } : state;
 
     case types.NOTIFICATION.SUCCESS:
-      return state ? { ...state, notification: action.payload.text } : state;
+      return state ? { ...state, notification: action.payload } : state;
 
     case types.ERRORS.RESET:
       return state ? { ...state, emailError: "", passError: "" } : state;
@@ -64,13 +56,13 @@ const ValidationReducer = (
       return state
         ? {
             ...state,
-            randomActivity: action.payload.activity,
+            randomActivity: action.payload,
             activityError: "",
           }
         : state;
 
     case types.ACTIVITY.ERROR:
-      return state ? { ...state, activityError: action.payload.error } : state;
+      return state ? { ...state, activityError: action.payload } : state;
 
     default:
       return state || EmailValidationInitialState;

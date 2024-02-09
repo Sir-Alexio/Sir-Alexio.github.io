@@ -53,15 +53,16 @@ const UserStore = types
       }
     },
 
-    validateEmail: () => {
-      return isEmailValid(self.entered.enteredLogin);
-    },
-    validatePassword: () => {
-      return isPasswordValid(self.entered.enteredPassword);
-    },
-
     resetUser: () => {
       self.user = { login: "", password: "" };
+    },
+  }))
+  .views((self) => ({
+    get validateEmail() {
+      return isEmailValid(self.entered.enteredLogin);
+    },
+    get validatePassword() {
+      return isPasswordValid(self.entered.enteredPassword);
     },
   }));
 

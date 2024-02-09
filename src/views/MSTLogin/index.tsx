@@ -8,10 +8,10 @@ import { userStore } from "mobx/store";
 import { observer } from "mobx-react";
 
 interface MstLoginProps {
-  onButtonClick: () => void;
+  onFormSubmit: () => void;
 }
 
-const MstLogin: React.FC<MstLoginProps> = observer((props) => {
+const MstLogin: React.FC<MstLoginProps> = observer(({ onFormSubmit }) => {
   const emailError = userStore.validation.loginValidation;
   const passError = userStore.validation.passwordValidation;
   const inputPassword = userStore.entered.enteredPassword;
@@ -75,7 +75,6 @@ const MstLogin: React.FC<MstLoginProps> = observer((props) => {
         onChange={LoginEmailChange}
         error={Boolean(emailError)}
         helperText={emailError}
-        // onKeyDown={props.onEnterClick}
       />
       <TextField
         id="outlined-basic"
@@ -97,13 +96,12 @@ const MstLogin: React.FC<MstLoginProps> = observer((props) => {
         onChange={LoginPasswordChange}
         error={Boolean(passError)}
         helperText={passError}
-        // onKeyDown={props.onEnterClick}
       />
       <Button
         variant="contained"
         sx={{ fontSize: "1.15rem" }}
         style={{ margin: "10px" }}
-        onClick={props.onButtonClick}
+        onClick={onFormSubmit}
       >
         Enter
       </Button>

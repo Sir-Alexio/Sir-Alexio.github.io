@@ -4,7 +4,6 @@ import { ILoginData } from "../types/types";
 
 //функциональный компонент для стандартного логина
 const LoginContainer: React.FC = () => {
-  //хуки для отслеживания состояний
   //Отслеживает ошибку для пароля
   const [passError, setPassError] = useState("");
 
@@ -19,12 +18,12 @@ const LoginContainer: React.FC = () => {
 
   //функция для изменения поля почты
   const onEmailChange = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
+    (inputEmail: string) => {
       //Определим регулярное выражение
       let regex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
 
       //Получаем почту
-      let email = event.target.value;
+      let email = inputEmail;
 
       //Используем хук для изменения почты
       setData((prevData) => {
@@ -43,8 +42,8 @@ const LoginContainer: React.FC = () => {
 
   //Функция для изменения поля пароля
   const onPasswordFieldChange = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      let password = event.target.value;
+    (inputPassword: string) => {
+      let password = inputPassword;
       setData((prevData) => {
         return { ...prevData, password: password };
       });

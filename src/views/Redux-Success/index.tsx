@@ -33,12 +33,16 @@ const ReduxSuccess: React.FC = () => {
     setTimeout(() => {
       dispatch(resetNotification());
     }, 3000);
-  }, [createNotification]);
+  }, []);
 
-  useEffect(() => {
+  const displaySuccessNotification = useCallback(() => {
     if (login && password) {
       successNotification();
     }
+  }, []);
+
+  useEffect(() => {
+    displaySuccessNotification();
   }, []);
 
   return (

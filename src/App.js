@@ -13,11 +13,70 @@ import FormikSuccess from "./views/FormikSuccess/index";
 import RandomActivity from "./views/RandomActivity/index";
 import MstSuccess from "./views/MstSuccess";
 import MstContainer from "./containers/MstContainer";
+import { useMemo } from "react";
 
 function App() {
-  const location = useLocation();
   const appBarColor = "#0f1116";
+  const tabColor = "#1a1d23";
 
+  const location = useLocation();
+
+  const pathname = useMemo(() => location.pathname, [location]);
+
+  const aboutTabStyle = useMemo(
+    () => ({
+      color: "white",
+      backgroundColor: pathname === "/about" ? tabColor : "transparent",
+    }),
+    [pathname]
+  );
+
+  const countersTabStyle = useMemo(
+    () => ({
+      color: "white",
+      backgroundColor: pathname === "/counters" ? tabColor : "transparent",
+    }),
+    [pathname]
+  );
+
+  const loginTabStyle = useMemo(
+    () => ({
+      color: "white",
+      backgroundColor: pathname === "/login" ? tabColor : "transparent",
+    }),
+    [pathname]
+  );
+  const reduxTabStyle = useMemo(
+    () => ({
+      color: "white",
+      backgroundColor: pathname === "/login-redux" ? tabColor : "transparent",
+    }),
+    [pathname]
+  );
+  const formikTabStyle = useMemo(
+    () => ({
+      color: "white",
+      backgroundColor: pathname === "/login-formik" ? tabColor : "transparent",
+    }),
+    [pathname]
+  );
+
+  const randomActivityTabStyle = useMemo(
+    () => ({
+      color: "white",
+      backgroundColor:
+        pathname === "/get-activity-saga" ? tabColor : "transparent",
+    }),
+    [pathname]
+  );
+
+  const MstTabStyle = useMemo(
+    () => ({
+      color: "white",
+      backgroundColor: pathname === "/login-mst" ? tabColor : "transparent",
+    }),
+    [pathname]
+  );
   return (
     <>
       <AppBar position="static" style={{ backgroundColor: appBarColor }}>
@@ -26,77 +85,43 @@ function App() {
             label="About"
             component={Link}
             to="/about"
-            style={{
-              color: "white",
-              backgroundColor:
-                location.pathname === "/about" ? "#1a1d23" : "transparent",
-            }}
+            style={aboutTabStyle}
           />
           <Tab
             label="Counters"
             component={Link}
             to="/counters"
-            style={{
-              color: "white",
-              backgroundColor:
-                location.pathname === "/counters" ? "#1a1d23" : "transparent",
-            }}
+            style={countersTabStyle}
           />
           <Tab
             label="Login"
             component={Link}
             to="/login"
-            style={{
-              color: "white",
-              backgroundColor:
-                location.pathname === "/login" ? "#1a1d23" : "transparent",
-            }}
+            style={loginTabStyle}
           />
           <Tab
             label="Login Redux"
             component={Link}
             to="/login-redux"
-            style={{
-              color: "white",
-              backgroundColor:
-                location.pathname === "/login-redux"
-                  ? "#1a1d23"
-                  : "transparent",
-            }}
+            style={reduxTabStyle}
           />
           <Tab
             label="Login Formik"
             component={Link}
             to="/login-formik"
-            style={{
-              color: "white",
-              backgroundColor:
-                location.pathname === "/login-formik"
-                  ? "#1a1d23"
-                  : "transparent",
-            }}
+            style={formikTabStyle}
           />
           <Tab
             label="Random Activity"
             component={Link}
             to="/get-activity-saga"
-            style={{
-              color: "white",
-              backgroundColor:
-                location.pathname === "/get-activity-saga"
-                  ? "#1a1d23"
-                  : "transparent",
-            }}
+            style={randomActivityTabStyle}
           />
           <Tab
             label="Login MST"
             component={Link}
             to="/login-mst"
-            style={{
-              color: "white",
-              backgroundColor:
-                location.pathname === "/login-mst" ? "#1a1d23" : "transparent",
-            }}
+            style={MstTabStyle}
           />
         </Tabs>
       </AppBar>

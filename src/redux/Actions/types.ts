@@ -27,3 +27,11 @@ export const types = {
     ERROR: "FETCH_TASKS_FAILURE",
   },
 };
+
+export type Action = {
+  type: string;
+};
+
+export type ActionWithPayload<T> = Action & {
+  payload: T;
+};

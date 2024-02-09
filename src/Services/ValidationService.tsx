@@ -2,12 +2,12 @@ import React, { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
-  validateEmail,
-  successEmail,
-  validatePassword,
-  successPassword,
-  loginField,
-  passwordField,
+  setErrorEmailValidation,
+  setSuccessEmailValidation,
+  setErrorPasswordValidation,
+  setSuccessPasswordValidation,
+  setLoginField,
+  setPasswordField,
   resetData,
   resetErrors,
 } from "../redux/Actions/actions";
@@ -39,31 +39,25 @@ export const useLoginFormState = () => {
 
   const dispatch = useDispatch();
 
-  const onEmailChange = useCallback(
-    (email: string) => {
-      dispatch(loginField(email));
+  const onEmailChange = useCallback((email: string) => {
+    dispatch(setLoginField(email));
 
-      if (isEmailValid(email)) {
-        dispatch(successEmail());
-      } else {
-        dispatch(validateEmail());
-      }
-    },
-    [loginField]
-  );
+    if (isEmailValid(email)) {
+      dispatch(setSuccessEmailValidation());
+    } else {
+      dispatch(setErrorEmailValidation());
+    }
+  }, []);
 
-  const onPasswordChange = useCallback(
-    (password: string) => {
-      dispatch(passwordField(password));
+  const onPasswordChange = useCallback((password: string) => {
+    dispatch(setPasswordField(password));
 
-      if (isPasswordValid(password)) {
-        dispatch(successPassword());
-      } else {
-        dispatch(validatePassword());
-      }
-    },
-    [passwordField]
-  );
+    if (isPasswordValid(password)) {
+      dispatch(setSuccessPasswordValidation());
+    } else {
+      dispatch(setErrorPasswordValidation());
+    }
+  }, []);
 
   const reset = useCallback(() => {
     dispatch(resetErrors());
