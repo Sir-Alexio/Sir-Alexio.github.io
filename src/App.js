@@ -1,17 +1,3 @@
-<<<<<<< HEAD
-import './styles.css'
-import {Routes, Route, Link,useLocation } from 'react-router-dom';
-import { AppBar, Tab, Tabs} from '@mui/material';
-import Counters from './containers/CounterContainer';
-import About from './views/About/index';
-import Homepage from './views/Home/index';
-import NotFound from './views/NotFound/index';
-import LoginContainer from './containers/LoginContainer';
-import LoginReduxContainer from './containers/ReduxLoginContainer';
-import ReduxSuccess from './views/Redux-Success/index';
-import LoginFormik from './views/LoginFormik/index';
-import FormikSuccess from './views/FormikSuccess/index';
-=======
 import "./styles.css";
 import { Routes, Route, Link, useLocation } from "react-router-dom";
 import { AppBar, Tab, Tabs } from "@mui/material";
@@ -23,7 +9,8 @@ import LoginContainer from "./containers/LoginContainer";
 import LoginReduxContainer from "./containers/ReduxLoginContainer";
 import ReduxSuccess from "./views/Redux-Success/index";
 import { useMemo } from "react";
->>>>>>> Task5-Redux-Development
+import LoginFormik from "views/LoginFormik";
+import FormikSuccess from "views/FormikSuccess";
 
 function App() {
   const appBarColor = "#0f1116";
@@ -63,6 +50,13 @@ function App() {
     }),
     [pathname]
   );
+  const formikTabStyle = useMemo(
+    () => ({
+      color: "white",
+      backgroundColor: pathname === "/login-formik" ? tabColor : "transparent",
+    }),
+    [pathname]
+  );
   return (
     <>
       <AppBar position="static" style={{ backgroundColor: appBarColor }}>
@@ -95,10 +89,7 @@ function App() {
             label="Login Formik"
             component={Link}
             to="/login-formik"
-            style={{
-              color: 'white',
-              backgroundColor: location.pathname === '/login-formik' ? '#1a1d23' : 'transparent',
-            }}
+            style={formikTabStyle}
           />
         </Tabs>
       </AppBar>

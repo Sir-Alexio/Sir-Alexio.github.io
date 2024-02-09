@@ -37,36 +37,27 @@ export const useLoginFormState = () => {
 
   const dispatch = useDispatch();
 
-  const onEmailChange = useCallback(
-    (email: string) => {
-      let regex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
-      // let email = event.target.value;
+  const onEmailChange = useCallback((email: string) => {
+    let regex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
 
-      dispatch(setLoginField(email));
+    dispatch(setLoginField(email));
 
-      if (!email.match(regex) && email.length >= 1) {
-        dispatch(setErrorEmailValidation());
-      } else {
-        dispatch(setSuccessEmailValidation());
-      }
-    },
-    []
-  );
+    if (!email.match(regex) && email.length >= 1) {
+      dispatch(setErrorEmailValidation());
+    } else {
+      dispatch(setSuccessEmailValidation());
+    }
+  }, []);
 
-  const onPasswordChange = useCallback(
-    (password: string) => {
-      //let password = event.target.value;
+  const onPasswordChange = useCallback((password: string) => {
+    dispatch(setPasswordField(password));
 
-      dispatch(setPasswordField(password));
-
-      if (password.length <= 6 && password.length >= 1) {
-        dispatch(setErrorPasswordValidation());
-      } else {
-        dispatch(setSuccessPasswordValidation());
-      }
-    },
-    []
-  );
+    if (password.length <= 6 && password.length >= 1) {
+      dispatch(setErrorPasswordValidation());
+    } else {
+      dispatch(setSuccessPasswordValidation());
+    }
+  }, []);
 
   const reset = useCallback(() => {
     dispatch(resetErrors());
