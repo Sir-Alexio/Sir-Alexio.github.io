@@ -30,21 +30,25 @@ const ReduxSuccess: React.FC = () => {
 
   const successNotification = useCallback(() => {
     dispatch(createNotification("Account has been successfuly created"));
-
-    setTimeout(() => {
-      dispatch(resetNotification());
-    }, 3000);
   }, []);
 
   const displaySuccessNotification = useCallback(() => {
     if (login && password) {
       successNotification();
     }
-  }, []);
+  }, [login, password]);
 
   useEffect(() => {
     displaySuccessNotification();
-  }, []);
+
+    const timeoutId = setTimeout(() => {
+      dispatch(resetNotification());
+    }, 3000);
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [displaySuccessNotification]);
 
   return (
     <div

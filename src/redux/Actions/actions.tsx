@@ -1,5 +1,4 @@
-import { Action } from "redux";
-import { LoginField, PassField, SuccessNotification } from "./actionTypes";
+import { Action, ActionWithPayload } from "../Actions/entity";
 
 import { types } from "./types";
 
@@ -27,17 +26,23 @@ export const resetData = (): Action => ({
   type: types.AUTH.DATA.RESET,
 });
 
-export const setLoginField = (inputText: string): LoginField => ({
+export const setLoginField = (
+  inputText: string
+): ActionWithPayload<string> => ({
   type: types.AUTH.LOGIN,
   payload: inputText,
 });
 
-export const setPasswordField = (inputText: string): PassField => ({
+export const setPasswordField = (
+  inputText: string
+): ActionWithPayload<string> => ({
   type: types.AUTH.PASSWORD,
   payload: inputText,
 });
 
-export const createNotification = (inputText: string): SuccessNotification => ({
+export const createNotification = (
+  inputText: string
+): ActionWithPayload<string> => ({
   type: types.NOTIFICATION.SUCCESS,
   payload: inputText,
 });
