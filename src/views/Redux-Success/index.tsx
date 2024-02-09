@@ -4,6 +4,7 @@ import TextField from "@mui/material/TextField";
 import Avatar from "@mui/material/Avatar";
 import Image from "./image.png";
 import Alert from "@mui/material/Alert";
+import { useCallback } from "react";
 
 import {
   createNotification,
@@ -27,18 +28,22 @@ const ReduxSuccess: React.FC = () => {
   );
   const dispatch = useDispatch();
 
-  const successNotification = () => {
+  const successNotification = useCallback(() => {
     dispatch(createNotification("Account has been successfuly created"));
 
     setTimeout(() => {
       dispatch(resetNotification());
     }, 3000);
-  };
+  }, []);
 
-  useEffect(() => {
+  const displaySuccessNotification = useCallback(() => {
     if (login && password) {
       successNotification();
     }
+  }, []);
+
+  useEffect(() => {
+    displaySuccessNotification();
   }, []);
 
   return (

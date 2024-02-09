@@ -1,31 +1,46 @@
-import React, { KeyboardEvent, useCallback, useEffect } from "react";
+import React, {
+  useState,
+  ChangeEvent,
+  KeyboardEvent,
+  useCallback,
+} from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Alert from "@mui/material/Alert";
-import { useLoginFormState } from "../../Services/ValidationService";
 import "./styles.css";
+import { ILoginData } from "../../types/types";
 
-interface InformationProps {
+interface LoginProps {
   notification: string;
-  onEnterPress: (event: KeyboardEvent<HTMLInputElement>) => void;
-  onButtonClick: () => void;
+  emailError: string;
+  passError: string;
+  data: ILoginData;
+  onEmailChange: (inputEmail: string) => void;
+  onPasswordFieldChange: (inputPassword: string) => void;
+  onFormSubmit: () => void;
 }
 
-const Login: React.FC<InformationProps> = (props) => {
-  //Используем общую логику валидации и отображения введенных данных
-  const {
-    emailError,
-    passError,
-    onEmailChange,
-    onPasswordChange,
-    inputLogin,
-    inputPassword,
-    reset,
-  } = useLoginFormState();
+const Login: React.FC<LoginProps> = ({
+  notification,
+  emailError,
+  passError,
+  data,
+  onEmailChange,
+  onPasswordFieldChange,
+  onFormSubmit,
+}) => {
+  //Флажок для нажатия на кнопку enter
+  const [isEnterInputEnable, setIsEnterInputEnable] = useState(true);
 
-  //Удаляем все введенные данные, если обновили страницу
-  useEffect(() => {
-    reset();
+  //Проверка нажатия на клавишу Enter
+  const onEnterPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter" && isEnterInputEnable) {
+      onFormSubmit();
+    }
+  };
+
+  const changeEnterSubmit = useCallback(() => {
+    setIsEnterInputEnable((prev) => !prev);
   }, []);
 
   const LoginEmailChange = useCallback(
@@ -37,26 +52,17 @@ const Login: React.FC<InformationProps> = (props) => {
 
   const LoginPasswordChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      onPasswordChange(event.target.value);
+      onPasswordFieldChange(event.target.value);
     },
-    [onPasswordChange]
+    [onPasswordFieldChange]
   );
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        color: "white",
-        padding: "20px",
-        margin: "100px",
-      }}
-    >
-      {props.notification && (
-        <div style={{ position: "fixed", top: 20, right: 20, zIndex: 9999 }}>
+    <div className="login-container">
+      {notification && (
+        <div className="notification-container">
           <Alert variant="filled" severity="success">
-            {props.notification}
+            {notification}
           </Alert>
         </div>
       )}
@@ -79,8 +85,8 @@ const Login: React.FC<InformationProps> = (props) => {
         onChange={LoginEmailChange}
         error={Boolean(emailError)}
         helperText={emailError}
-        onKeyDown={props.onEnterPress}
-        value={inputLogin}
+        value={data.email}
+        onKeyDown={onEnterPress}
       />
       <TextField
         id="outlined-basic"
@@ -102,32 +108,20 @@ const Login: React.FC<InformationProps> = (props) => {
         error={Boolean(passError)}
         helperText={passError}
         type="password"
-        onKeyDown={props.onEnterPress}
-        value={inputPassword}
+        value={data.password}
+        onKeyDown={onEnterPress}
       />
       <Button
         variant="outlined"
         sx={{ fontSize: "1.15rem" }}
         style={{ margin: "10px" }}
-        onClick={props.onButtonClick}
+        onClick={onFormSubmit}
       >
         Enter
       </Button>
-      <div
-        className="counter-block"
-        style={{
-          marginTop: "20px",
-          fontSize: "18px",
-          color: "white",
-          margin: "70px",
-        }}
-      >
-        <div style={{ color: "white", fontSize: "16px", margin: "10px" }}>
-          Current email: {inputLogin}
-        </div>
-        <div style={{ color: "white", fontSize: "16px", margin: "10px" }}>
-          Current password: {inputPassword}
-        </div>
+      <div className="counter-block">
+        <div className="email-info">Current email: {data.email}</div>
+        <div className="password-info">Current password: {data.password}</div>
       </div>
     </div>
   );
