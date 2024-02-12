@@ -11,6 +11,7 @@ import ReduxSuccess from "./views/Redux-Success/index";
 import { useMemo } from "react";
 import LoginFormik from "views/LoginFormik";
 import FormikSuccess from "views/FormikSuccess";
+import RandomActivity from "views/RandomActivity";
 
 const appBarColor = "#0f1116";
 const tabColor = "#1a1d23";
@@ -57,6 +58,15 @@ function App() {
     }),
     [pathname]
   );
+
+  const randomActivityTabStyle = useMemo(
+    () => ({
+      color: "white",
+      backgroundColor:
+        pathname === "/get-activity-saga" ? tabColor : "transparent",
+    }),
+    [pathname]
+  );
   return (
     <>
       <AppBar position="static" style={{ backgroundColor: appBarColor }}>
@@ -91,6 +101,12 @@ function App() {
             to="/login-formik"
             style={formikTabStyle}
           />
+          <Tab
+            label="Random Activity"
+            component={Link}
+            to="/get-activity-saga"
+            style={randomActivityTabStyle}
+          />
         </Tabs>
       </AppBar>
 
@@ -103,6 +119,7 @@ function App() {
         <Route path="/login-redux/success" element={<ReduxSuccess />} />
         <Route path="/login-formik/success" element={<FormikSuccess />} />
         <Route path="/login-formik" element={<LoginFormik />} />
+        <Route path="/get-activity-saga" element={<RandomActivity />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

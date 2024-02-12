@@ -1,5 +1,5 @@
 import { types } from "../Actions/types";
-import { ActionWithPayload } from "../Actions/entity";
+import { ActionWithPayload } from "../Actions/types";
 
 interface IEmailValidationState {
   emailError: string;
@@ -51,6 +51,18 @@ const ValidationReducer = (
 
     case types.AUTH.DATA.RESET:
       return state ? { ...state, loginField: "", passwordField: "" } : state;
+
+    case types.ACTIVITY.SUCCESS:
+      return state
+        ? {
+            ...state,
+            randomActivity: action.payload,
+            activityError: "",
+          }
+        : state;
+
+    case types.ACTIVITY.ERROR:
+      return state ? { ...state, activityError: action.payload } : state;
 
     default:
       return state || EmailValidationInitialState;

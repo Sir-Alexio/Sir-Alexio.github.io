@@ -1,6 +1,9 @@
-import { Action, ActionWithPayload } from "../Actions/entity";
+import { Action, ActionWithPayload } from "./types";
+import { LoginField, PassField, SuccessNotification } from "./actionTypes";
 
 import { types } from "./types";
+
+export const fetchData = (): Action => ({ type: types.ACTIVITY.DATA });
 
 export const setErrorEmailValidation = (): Action => ({
   type: types.AUTH.EMAIL_VALIDATION.ERROR,

@@ -21,4 +21,17 @@ export const types = {
   ERRORS: {
     RESET: "ERRORS.RESET",
   },
+  ACTIVITY: {
+    DATA: "FETCH_DATA",
+    SUCCESS: "FETCH_TASKS_SUCCESS",
+    ERROR: "FETCH_TASKS_FAILURE",
+  },
+};
+
+export type Action = {
+  type: string;
+};
+
+export type ActionWithPayload<T> = Action & {
+  payload: T;
 };

@@ -4,7 +4,6 @@ import { ILoginData } from "../types/types";
 
 //функциональный компонент для стандартного логина
 const LoginContainer: React.FC = () => {
-  //хуки для отслеживания состояний
   //Отслеживает ошибку для пароля
   const [passError, setPassError] = useState("");
 
