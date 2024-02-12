@@ -10,7 +10,7 @@ import Alert from "@mui/material/Alert";
 import "./styles.css";
 import { ILoginData } from "../../types/types";
 
-interface LoginProps {
+interface ILoginProps {
   notification: string;
   emailError: string;
   passError: string;
@@ -20,7 +20,7 @@ interface LoginProps {
   onFormSubmit: () => void;
 }
 
-const Login: React.FC<LoginProps> = ({
+const Login: React.FC<ILoginProps> = ({
   notification,
   emailError,
   passError,
@@ -33,15 +33,14 @@ const Login: React.FC<LoginProps> = ({
   const [isEnterInputEnable, setIsEnterInputEnable] = useState(true);
 
   //Проверка нажатия на клавишу Enter
-  const onEnterPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter" && isEnterInputEnable) {
-      onFormSubmit();
-    }
-  };
-
-  const changeEnterSubmit = useCallback(() => {
-    setIsEnterInputEnable((prev) => !prev);
-  }, []);
+  const onEnterPress = useCallback(
+    (event: React.KeyboardEvent<HTMLInputElement>) => {
+      if (event.key === "Enter" && isEnterInputEnable) {
+        onFormSubmit();
+      }
+    },
+    []
+  );
 
   return (
     <div className="login-container">

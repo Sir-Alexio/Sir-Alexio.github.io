@@ -13,11 +13,11 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
+    "noEmit": true,
     "baseUrl": "./src",
     "paths": {
-      "@/views/*": ["views/*"]
-    },
-    "noEmit": true
+      "@redux/Actions": ["redux/Actions/actions"]
+    }
   },
   "include": ["src"]
 }
