@@ -1,11 +1,11 @@
 const Styles = {
-  button: {
+  buttonStyle: {
     borderRadius: 20,
     marginRight: "10px",
     width: "130px",
     height: "40px",
   },
-  counter: {
+  counterStyle: {
     marginBottom: "10px",
   },
 };

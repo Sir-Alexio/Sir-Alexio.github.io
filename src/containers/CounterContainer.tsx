@@ -25,13 +25,12 @@ class CounterContainer extends React.Component {
   };
 
   render() {
-    const { currentCounter } = this.state;
     return (
       <Counter
-        currentCounter={currentCounter}
-        onIncrement={this.onIncrementClick}
-        onDecrement={this.onDecrementClick}
-        onReset={this.onResetClick}
+        currentCounter={this.state.currentCounter}
+        onIncrementClick={this.onIncrementClick}
+        onDecrementClick={this.onDecrementClick}
+        onResetClick={this.onResetClick}
       />
     );
   }
