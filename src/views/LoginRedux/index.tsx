@@ -20,6 +20,20 @@ const LoginRedux: React.FC<LoginReduxProps> = ({ onFormSubmit }) => {
     reset,
   } = useLoginFormState();
 
+  const LoginEmailChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      onEmailChange(event.target.value);
+    },
+    [onEmailChange]
+  );
+
+  const LoginPasswordChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      onPasswordChange(event.target.value);
+    },
+    [onPasswordChange]
+  );
+
   const onEnterClick = useCallback(
     (event: React.KeyboardEvent<HTMLInputElement>) => {
       if (event.key === "Enter") {
@@ -61,7 +75,7 @@ const LoginRedux: React.FC<LoginReduxProps> = ({ onFormSubmit }) => {
         }}
         placeholder="Enter your login"
         style={{ margin: "10px" }}
-        onChange={onEmailChange}
+        onChange={LoginEmailChange}
         error={Boolean(emailError)}
         helperText={emailError}
         onKeyDown={onEnterClick}
@@ -83,7 +97,7 @@ const LoginRedux: React.FC<LoginReduxProps> = ({ onFormSubmit }) => {
         placeholder="Enter your password"
         style={{ margin: "10px" }}
         type="password"
-        onChange={onPasswordChange}
+        onChange={LoginPasswordChange}
         error={Boolean(passError)}
         helperText={passError}
         onKeyDown={onEnterClick}

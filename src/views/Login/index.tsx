@@ -15,8 +15,8 @@ interface ILoginProps {
   emailError: string;
   passError: string;
   data: ILoginData;
-  onEmailChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  onPasswordFieldChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  onEmailChange: (inputEmail: string) => void;
+  onPasswordFieldChange: (inputPassword: string) => void;
   onFormSubmit: () => void;
 }
 
@@ -40,6 +40,20 @@ const Login: React.FC<ILoginProps> = ({
       }
     },
     []
+  );
+
+  const LoginEmailChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      onEmailChange(event.target.value);
+    },
+    [onEmailChange]
+  );
+
+  const LoginPasswordChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      onPasswordFieldChange(event.target.value);
+    },
+    [onPasswordFieldChange]
   );
 
   return (
@@ -67,7 +81,7 @@ const Login: React.FC<ILoginProps> = ({
         }}
         placeholder="Enter your login"
         style={{ margin: "10px" }}
-        onChange={onEmailChange}
+        onChange={LoginEmailChange}
         error={Boolean(emailError)}
         helperText={emailError}
         value={data.email}
@@ -89,7 +103,7 @@ const Login: React.FC<ILoginProps> = ({
         }}
         placeholder="Enter your password"
         style={{ margin: "10px" }}
-        onChange={onPasswordFieldChange}
+        onChange={LoginPasswordChange}
         error={Boolean(passError)}
         helperText={passError}
         type="password"
