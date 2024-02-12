@@ -7,6 +7,7 @@ import Counters from "./containers/CounterContainer";
 import About from "./views/About/index";
 import Homepage from "./views/Home/index";
 import NotFound from "./views/NotFound/index";
+import LoginContainer from "containers/LoginContainer";
 
 const appBarColor = "#0f1116";
 const tabColor = "#1a1d23";
@@ -32,6 +33,13 @@ function App() {
     [pathname]
   );
 
+  const loginTabStyle = useMemo(
+    () => ({
+      color: "white",
+      backgroundColor: pathname === "/login" ? tabColor : "transparent",
+    }),
+    [pathname]
+  );
   return (
     <>
       <AppBar position="static" style={{ backgroundColor: appBarColor }}>
@@ -48,6 +56,12 @@ function App() {
             to="/counters"
             style={countersTabStyle}
           />
+          <Tab
+            label="Login"
+            component={Link}
+            to="/login"
+            style={loginTabStyle}
+          />
         </Tabs>
       </AppBar>
 
@@ -55,6 +69,7 @@ function App() {
         <Route path="/" element={<Homepage />} />
         <Route path="/about" element={<About />} />
         <Route path="/counters" element={<Counters />} />
+        <Route path="/login" element={<LoginContainer />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
