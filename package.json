@@ -17,6 +17,9 @@
     "@types/react-router-dom": "^5.3.3",
     "axios": "^1.6.5",
     "formik": "^2.4.5",
+    "mobx": "^6.12.0",
+    "mobx-react": "^9.1.0",
+    "mobx-state-tree": "^5.4.1",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -30,8 +33,8 @@
     "yup": "^1.3.3"
   },
   "scripts": {
-    "homepage": "https://sir-alexio.github.io/Task7-Saga-Development",
-    "deploy": "gh-pages -d build -b deploy",
+    "homepage": "https://sir-alexio.github.io/Task8-MST-Development",
+    "deploy": "gh-pages -d build -b mst-deploy",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "start": "react-scripts start",

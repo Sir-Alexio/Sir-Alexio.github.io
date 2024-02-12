@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useLoginFormState } from "../../Services/ValidationService";
 import Typography from "@mui/material/Typography";
 import { validationSchema } from "./validation";
-import { initialState } from "../../constants";
+import { INITIAL_STATE } from "../../constants";
 import "./styles.css";
 
 interface IFormValues {
@@ -27,7 +27,7 @@ const LoginFormik: React.FC = () => {
   return (
     <div className="form-container">
       <Formik
-        initialValues={initialState}
+        initialValues={INITIAL_STATE}
         validationSchema={validationSchema}
         onSubmit={onSubmitButton}
       >

@@ -1,7 +1,7 @@
 import { takeLatest, call, put } from "redux-saga/effects";
 import axios from "axios";
 import { types } from "../Actions/types";
-import { activityUrl } from "../../constants";
+import { ACTIVITY_URL } from "../../constants";
 
 interface IDataActivity {
   data: {
@@ -11,7 +11,7 @@ interface IDataActivity {
 
 function* fetchDataSaga() {
   try {
-    const response: IDataActivity = yield call(axios.get, activityUrl);
+    const response: IDataActivity = yield call(axios.get, ACTIVITY_URL);
 
     yield put({
       type: types.ACTIVITY.SUCCESS,

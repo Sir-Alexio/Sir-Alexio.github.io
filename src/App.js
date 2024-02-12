@@ -8,10 +8,12 @@ import NotFound from "./views/NotFound/index";
 import LoginContainer from "./containers/LoginContainer";
 import LoginReduxContainer from "./containers/ReduxLoginContainer";
 import ReduxSuccess from "./views/Redux-Success/index";
+import LoginFormik from "./views/LoginFormik/index";
+import FormikSuccess from "./views/FormikSuccess/index";
+import RandomActivity from "./views/RandomActivity/index";
+import MstSuccess from "./views/MstSuccess";
+import MstContainer from "./containers/MstContainer";
 import { useMemo } from "react";
-import LoginFormik from "views/LoginFormik";
-import FormikSuccess from "views/FormikSuccess";
-import RandomActivity from "views/RandomActivity";
 
 const appBarColor = "#0f1116";
 const tabColor = "#1a1d23";
@@ -67,6 +69,14 @@ function App() {
     }),
     [pathname]
   );
+
+  const MstTabStyle = useMemo(
+    () => ({
+      color: "white",
+      backgroundColor: pathname === "/login-mst" ? tabColor : "transparent",
+    }),
+    [pathname]
+  );
   return (
     <>
       <AppBar position="static" style={{ backgroundColor: appBarColor }}>
@@ -107,6 +117,12 @@ function App() {
             to="/get-activity-saga"
             style={randomActivityTabStyle}
           />
+          <Tab
+            label="Login MST"
+            component={Link}
+            to="/login-mst"
+            style={MstTabStyle}
+          />
         </Tabs>
       </AppBar>
 
@@ -118,8 +134,10 @@ function App() {
         <Route path="/login-redux" element={<LoginReduxContainer />} />
         <Route path="/login-redux/success" element={<ReduxSuccess />} />
         <Route path="/login-formik/success" element={<FormikSuccess />} />
+        <Route path="/login-mst/success" element={<MstSuccess />} />
         <Route path="/login-formik" element={<LoginFormik />} />
         <Route path="/get-activity-saga" element={<RandomActivity />} />
+        <Route path="/login-mst" element={<MstContainer />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
