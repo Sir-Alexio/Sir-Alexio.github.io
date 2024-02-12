@@ -15,11 +15,14 @@ interface IFormValues {
 const LoginFormik: React.FC = () => {
   const { onEmailChange, onPasswordChange } = useLoginFormState();
   const navigate = useNavigate();
-  const onSubmitButton = useCallback((values: IFormValues) => {
-    onEmailChange(values.email);
-    onPasswordChange(values.password);
-    navigate("/login-formik/success");
-  }, []);
+  const onSubmitButton = useCallback(
+    (values: IFormValues) => {
+      onEmailChange(values.email);
+      onPasswordChange(values.password);
+      navigate("/login-formik/success");
+    },
+    [onEmailChange, onPasswordChange]
+  );
 
   return (
     <div className="form-container">
