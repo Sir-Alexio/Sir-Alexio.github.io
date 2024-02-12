@@ -8,10 +8,10 @@ import About from "./views/About/index";
 import Homepage from "./views/Home/index";
 import NotFound from "./views/NotFound/index";
 
-function App() {
-  const appBarColor = "#0f1116";
-  const tabColor = "#1a1d23";
+const appBarColor = "#0f1116";
+const tabColor = "#1a1d23";
 
+function App() {
   const location = useLocation();
 
   const pathname = useMemo(() => location.pathname, [location]);
