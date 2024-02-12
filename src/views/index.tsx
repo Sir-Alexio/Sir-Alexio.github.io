@@ -9,9 +9,12 @@ interface ICounterContainer {
   onResetClick: () => void;
 }
 
-const Counter: React.FC<ICounterContainer> = (props) => {
-  const { currentCounter, onIncrementClick, onDecrementClick, onResetClick } =
-    props;
+const Counter: React.FC<ICounterContainer> = ({
+  currentCounter,
+  onIncrementClick,
+  onDecrementClick,
+  onResetClick,
+}) => {
   return (
     <div>
       <div style={Styles.counterStyle}>Current count: {currentCounter}</div>
